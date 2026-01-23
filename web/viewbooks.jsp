@@ -13,11 +13,6 @@
     
     String role = (String) userSession.getAttribute("role");
     boolean isLibrarian = "Librarian".equals(role);
-    
-    if (!isLibrarian) {
-        response.sendRedirect(isLibrarian ? "librarian_dashboard.jsp" : "student_dashboard.jsp");
-        return;
-    }
 %>
 
 <!DOCTYPE html>
@@ -28,7 +23,7 @@
     <link rel="Shortcut Icon" type="image/ico" href="favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management - Library Management System</title>
+    <title>All Books - Library Management System</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -247,70 +242,38 @@
             text-align: center;
         }
 
-        /* Status Badges */
-        .status-active {
+        /* Copy Badges */
+        .copies-high {
             background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: white;
-            padding: 0.4rem 1.2rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
             display: inline-block;
-            min-width: 100px;
+            min-width: 60px;
         }
 
-        .status-blocked {
+        .copies-medium {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+            min-width: 60px;
+        }
+
+        .copies-low {
             background: linear-gradient(135deg, #e74c3c, #f39c12);
             color: white;
-            padding: 0.4rem 1.2rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
             display: inline-block;
-            min-width: 100px;
-        }
-
-        /* Action Buttons */
-        .btn-action {
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            min-width: 160px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .btn-block {
-            background: var(--gradient-accent);
-            color: white;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .btn-block:hover {
-            background: linear-gradient(135deg, #c0392b, #e74c3c);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-        }
-
-        .btn-activate {
-            background: var(--gradient-success);
-            color: white;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
-
-        .btn-activate:hover {
-            background: linear-gradient(135deg, #219653, #27ae60);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+            min-width: 60px;
         }
 
         /* Statistics Cards */
@@ -520,12 +483,6 @@
                 font-size: 0.9rem;
             }
 
-            .btn-action {
-                min-width: 140px;
-                padding: 0.4rem 1rem;
-                font-size: 0.8rem;
-            }
-
             .stats-container {
                 grid-template-columns: 1fr;
             }
@@ -536,14 +493,10 @@
                 font-size: 0.8rem;
             }
 
-            .btn-action {
-                min-width: 120px;
-                font-size: 0.75rem;
-            }
-
-            .status-active,
-            .status-blocked {
-                min-width: 80px;
+            .copies-high,
+            .copies-medium,
+            .copies-low {
+                min-width: 50px;
                 font-size: 0.75rem;
                 padding: 0.3rem 0.8rem;
             }
@@ -607,6 +560,56 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
+
+        .btn-success-custom {
+            background: var(--gradient-success);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-success-custom:hover {
+            background: linear-gradient(135deg, #219653, #27ae60);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-danger-custom {
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-danger-custom:hover {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
     </style>
 </head>
 
@@ -615,13 +618,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <!-- Brand Logo -->
-            <a class="navbar-brand" href="librarian_dashboard.jsp">
+            <a class="navbar-brand" href="<%= isLibrarian ? "librarian_dashboard.jsp" : "student_dashboard.jsp" %>">
                 <div class="brand-icon">
                     <i class="fas fa-book-open fa-lg"></i>
                 </div>
                 <div>
                     <span class="brand-text">Library Hub</span>
-                    <span class="brand-subtext">Student Management</span>
+                    <span class="brand-subtext">Book Collection</span>
                 </div>
             </a>
             
@@ -634,7 +637,7 @@
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="librarian_dashboard.jsp">
+                        <a class="nav-link active" href="<%= isLibrarian ? "librarian_dashboard.jsp" : "student_dashboard.jsp" %>">
                             <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
                         </a>
                     </li>
@@ -653,29 +656,29 @@
         <div class="results-container">
             <div class="results-header">
                 <div class="form-icon">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-books"></i>
                 </div>
-                <h2>Student Management</h2>
-                <p class="text-muted">Manage student accounts and their access permissions</p>
+                <h2>Complete Book Collection</h2>
+                <p class="text-muted">Browse through the entire library book collection</p>
             </div>
 
             <%
                 DBCon db = new DBCon();
-                int totalStudents = 0;
-                int activeStudents = 0;
-                int blockedStudents = 0;
+                int totalBooks = 0;
+                int totalCopies = 0;
+                int availableCopies = 0;
                 
                 try {
                     // Get statistics
-                    db.pstmt = db.con.prepareStatement("SELECT COUNT(*) as total, " +
-                                                       "SUM(CASE WHEN ac_status = 1 THEN 1 ELSE 0 END) as active, " +
-                                                       "SUM(CASE WHEN ac_status = 0 THEN 1 ELSE 0 END) as blocked " +
-                                                       "FROM users WHERE role = 'student'");
+                    db.pstmt = db.con.prepareStatement("SELECT COUNT(*) as total_books, " +
+                                                       "SUM(available_copies) as total_copies, " +
+                                                       "SUM(available_copies) as available_copies_sum " +
+                                                       "FROM books2");
                     db.rst = db.pstmt.executeQuery();
                     if (db.rst.next()) {
-                        totalStudents = db.rst.getInt("total");
-                        activeStudents = db.rst.getInt("active");
-                        blockedStudents = db.rst.getInt("blocked");
+                        totalBooks = db.rst.getInt("total_books");
+                        totalCopies = db.rst.getInt("total_copies");
+                        availableCopies = db.rst.getInt("available_copies_sum");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -686,79 +689,75 @@
             <div class="stats-container">
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-book"></i>
                     </div>
-                    <div class="stat-value"><%= totalStudents %></div>
-                    <div class="stat-label">Total Students</div>
+                    <div class="stat-value"><%= totalBooks %></div>
+                    <div class="stat-label">Total Books</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon" style="background: var(--gradient-success);">
-                        <i class="fas fa-user-check"></i>
+                        <i class="fas fa-copy"></i>
                     </div>
-                    <div class="stat-value"><%= activeStudents %></div>
-                    <div class="stat-label">Active Students</div>
+                    <div class="stat-value"><%= totalCopies %></div>
+                    <div class="stat-label">Total Copies</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon" style="background: var(--gradient-accent);">
-                        <i class="fas fa-user-slash"></i>
+                    <div class="stat-icon" style="background: var(--gradient-secondary);">
+                        <i class="fas fa-book-reader"></i>
                     </div>
-                    <div class="stat-value"><%= blockedStudents %></div>
-                    <div class="stat-label">Blocked Students</div>
+                    <div class="stat-value"><%= availableCopies %></div>
+                    <div class="stat-label">Available Copies</div>
                 </div>
             </div>
 
-            <!-- Student List Table -->
+            <!-- Book List Table -->
             <div class="table-responsive">
                 <table class="table table-custom">
                     <thead>
                         <tr>
-                            <th><i class="fas fa-id-card"></i> User ID</th>
-                            <th><i class="fas fa-user"></i> Username</th>
-                            <th><i class="fas fa-key"></i> Password</th>
-                            <th><i class="fas fa-user-tag"></i> Role</th>
-                            <th><i class="fas fa-envelope"></i> Email</th>
-                            <th><i class="fas fa-info-circle"></i> Account Status</th>
-                            <th><i class="fas fa-cogs"></i> Action</th>
+                            <th><i class="fas fa-barcode"></i> Book ID</th>
+                            <th><i class="fas fa-heading"></i> Title</th>
+                            <th><i class="fas fa-user-edit"></i> Author</th>
+                            <th><i class="fas fa-building"></i> Publisher</th>
+                            <th><i class="fas fa-calendar-alt"></i> Publication Year</th>
+                            <th><i class="fas fa-copy"></i> Available Copies</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
                             try {
-                                // Get student list
-                                db.pstmt = db.con.prepareStatement("SELECT * FROM users WHERE role = 'student' ORDER BY user_id");
+                                // Get book list
+                                db.pstmt = db.con.prepareStatement("SELECT * FROM books2 ORDER BY book_id");
                                 db.rst = db.pstmt.executeQuery();
                                 
                                 while (db.rst.next()) {
-                                    String userId = db.rst.getString("user_id");
-                                    String username = db.rst.getString("username");
-                                    String password = db.rst.getString("password");
-                                    String userRole = db.rst.getString("role");
-                                    String email = db.rst.getString("email");
-                                    int acStatus = db.rst.getInt("ac_status");
+                                    String book_id = db.rst.getString("book_id");
+                                    String title = db.rst.getString("title");
+                                    String author = db.rst.getString("author");
+                                    String publisher = db.rst.getString("publisher");
+                                    String year_of_publication = db.rst.getString("year_of_publication");
+                                    int available_copies = db.rst.getInt("available_copies");
+                                    
+                                    // Determine copy status class
+                                    String copyClass;
+                                    if (available_copies >= 10) {
+                                        copyClass = "copies-high";
+                                    } else if (available_copies >= 5) {
+                                        copyClass = "copies-medium";
+                                    } else {
+                                        copyClass = "copies-low";
+                                    }
                         %>
                         <tr>
-                            <td><strong><%= userId %></strong></td>
-                            <td><%= username %></td>
-                            <td><code><%= password %></code></td>
-                            <td><span class="badge badge-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><%= userRole %></span></td>
-                            <td><a href="mailto:<%= email %>" class="text-primary"><i class="fas fa-envelope mr-1"></i><%= email %></a></td>
+                            <td><strong><%= book_id %></strong></td>
+                            <td><strong><%= title %></strong></td>
+                            <td><%= author %></td>
+                            <td><%= publisher %></td>
+                            <td><span class="badge badge-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><%= year_of_publication %></span></td>
                             <td>
-                                <% if (acStatus == 1) { %>
-                                    <span class="status-active"><i class="fas fa-check-circle mr-1"></i> Active</span>
-                                <% } else { %>
-                                    <span class="status-blocked"><i class="fas fa-ban mr-1"></i> Blocked</span>
-                                <% } %>
-                            </td>
-                            <td>
-                                <% if (acStatus == 1) { %>
-                                    <a href='BlockUnblock?email=<%= email %>&status=0' class='btn-action btn-block'>
-                                        <i class="fas fa-ban mr-1"></i> Block Account
-                                    </a>
-                                <% } else { %>
-                                    <a href='BlockUnblock?email=<%= email %>&status=1' class='btn-action btn-activate'>
-                                        <i class="fas fa-check mr-1"></i> Activate Account
-                                    </a>
-                                <% } %>
+                                <span class="<%= copyClass %>">
+                                    <i class="fas fa-book mr-1"></i> <%= available_copies %>
+                                </span>
                             </td>
                         </tr>
                         <%
@@ -777,9 +776,19 @@
 
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <a href="view_allattendance.jsp" class="btn-custom" style="background: var(--gradient-success);">
-                    <i class="fas fa-clipboard-list"></i> Attendance
+                
+                <% if (isLibrarian) { %>
+                <a href="add_book.jsp" class="btn-success-custom">
+                    <i class="fas fa-plus-circle"></i> Add New Book
                 </a>
+                <a href="delete_book.jsp" class="btn-danger-custom">
+                    <i class="fas fa-trash-alt"></i> Delete Book
+                </a>
+                <% } else { %>
+                <a href="search_book.jsp" class="btn-success-custom">
+                    <i class="fas fa-search"></i> Search Books
+                </a>
+                <% } %>
             </div>
         </div>
     </div>
@@ -789,21 +798,40 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Admin Tools</h4>
-                    <a href="librarian_dashboard.jsp"><i class="fas fa-chevron-right mr-2"></i>Dashboard</a>
-                    <a href="viewStudents.jsp"><i class="fas fa-chevron-right mr-2"></i>Student Management</a>
-                    <a href="viewallbooks.jsp"><i class="fas fa-chevron-right mr-2"></i>Book Management</a>
-                    <a href="add_book.jsp"><i class="fas fa-chevron-right mr-2"></i>Add Book</a>
-                    <a href="delete_book.jsp"><i class="fas fa-chevron-right mr-2"></i>Delete Book</a>
+                    <h4>Quick Links</h4>
+                    <a href="<%= isLibrarian ? "librarian_dashboard.jsp" : "student_dashboard.jsp" %>">
+                        <i class="fas fa-chevron-right mr-2"></i>Dashboard
+                    </a>
+                    <a href="viewallbooks.jsp">
+                        <i class="fas fa-chevron-right mr-2"></i>All Books
+                    </a>
+                    <a href="search_book.jsp">
+                        <i class="fas fa-chevron-right mr-2"></i>Search Books
+                    </a>
+                    <% if (isLibrarian) { %>
+                    <a href="add_book.jsp">
+                        <i class="fas fa-chevron-right mr-2"></i>Add Book
+                    </a>
+                    <a href="viewStudents.jsp">
+                        <i class="fas fa-chevron-right mr-2"></i>Students
+                    </a>
+                    <% } else { %>
+                    <a href="borrowed_books.jsp">
+                        <i class="fas fa-chevron-right mr-2"></i>My Books
+                    </a>
+                    <a href="request_book.jsp">
+                        <i class="fas fa-chevron-right mr-2"></i>Request Book
+                    </a>
+                    <% } %>
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Library Reports</h4>
-                    <a href="view_allattendance.jsp"><i class="fas fa-chevron-right mr-2"></i>Attendance</a>
-                    <a href="viewFeedback.jsp"><i class="fas fa-chevron-right mr-2"></i>Feedback</a>
-                    <a href="viewallfins.jsp"><i class="fas fa-chevron-right mr-2"></i>Fines</a>
-                    <a href="issue_book.jsp"><i class="fas fa-chevron-right mr-2"></i>Issue Books</a>
-                    <a href="return_book.jsp"><i class="fas fa-chevron-right mr-2"></i>Return Books</a>
+                    <h4>Library Resources</h4>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>E-Books</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Research Papers</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Journals</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Magazines</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Digital Archives</a>
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -823,14 +851,12 @@
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Quick Actions</h4>
-                    <div class="quick-links">
-                        <a href="search_book.jsp"><i class="fas fa-search mr-1"></i> Search Books</a>
-                        <a href="issue_book.jsp"><i class="fas fa-book-reader mr-1"></i> Issue Book</a>
-                        <a href="viewallbooks.jsp"><i class="fas fa-list mr-1"></i> All Books</a>
-                        <a href="viewallfins.jsp"><i class="fas fa-money-bill-wave mr-1"></i> Fines</a>
-                        <a href="Logout"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
-                    </div>
+                    <h4>Library Services</h4>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Book Reservation</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Renew Books</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Library Rules</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Fine Structure</a>
+                    <a href="Logout"><i class="fas fa-chevron-right mr-2"></i>Logout</a>
                 </div>
             </div>
         </div>
@@ -866,22 +892,16 @@
             }
         });
 
-        // Confirm before blocking/activating accounts
+        // Highlight rows on hover
         $(document).ready(function() {
-            $('.btn-action').click(function(e) {
-                var action = $(this).hasClass('btn-block') ? 'block' : 'activate';
-                var email = $(this).attr('href').split('email=')[1].split('&')[0];
-                
-                if (action === 'block') {
-                    if (!confirm('Are you sure you want to BLOCK this student account?\n\nEmail: ' + email + '\n\nThis will prevent the student from accessing the library system.')) {
-                        e.preventDefault();
-                    }
-                } else {
-                    if (!confirm('Are you sure you want to ACTIVATE this student account?\n\nEmail: ' + email + '\n\nThis will restore the student\'s access to the library system.')) {
-                        e.preventDefault();
-                    }
+            $('.table-custom tbody tr').hover(
+                function() {
+                    $(this).addClass('table-hover');
+                },
+                function() {
+                    $(this).removeClass('table-hover');
                 }
-            });
+            );
         });
     </script>
 </body>

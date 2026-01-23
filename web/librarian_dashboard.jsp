@@ -716,6 +716,14 @@
             <div class="dashboard-grid">
                 <div class="dashboard-card">
                     <div class="card-icon books">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>View Book</h4>
+                    <p>View all registered Books</p>
+                    <a href="viewbooks.jsp" class="pulse">View Book</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon books">
                         <i class="fas fa-plus"></i>
                     </div>
                     <h4>Add Book</h4>
