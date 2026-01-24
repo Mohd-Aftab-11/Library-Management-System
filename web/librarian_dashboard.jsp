@@ -856,6 +856,16 @@
                     <p>Update your account password</p>
                     <a href="change_password.jsp">Change Password</a>
                 </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-icon settings">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4>Feedback</h4>
+                    <p>Give feedback</p>
+                    <a href="feedback.jsp">Give Feedback</a>
+                </div>
+                
                 <div class="dashboard-card">
                     <div class="card-icon settings">
                         <i class="fas fa-comments"></i>
