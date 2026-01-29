@@ -14,22 +14,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-            --light-color: #f8f9fa;
-            --dark-color: #2c3e50;
-            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-primary: linear-gradient(135deg, #2c3e50, #4a6491);
-            --gradient-secondary: linear-gradient(135deg, #3498db, #2ecc71);
-            --gradient-accent: linear-gradient(135deg, #e74c3c, #f39c12);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #ef4444;
+            --success-color: #10b981;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --gray-color: #64748b;
+            --light-gray: #e2e8f0;
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            --gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            --gradient-accent: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+            --card-radius: 12px;
         }
 
         * {
@@ -39,82 +43,98 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--light-color);
-            color: #333;
+            color: var(--dark-color);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            position: relative;
-            padding-bottom: 50px;
-            transition: margin-left 0.3s ease;
         }
 
-        /* Top Header - Centered Library Hub */
-        .top-header {
-            background: var(--gradient-primary);
-            padding: 15px 0;
-            text-align: center;
+        /* Modern Header */
+        .modern-header {
+            background: white;
+            padding: 1rem 0;
             box-shadow: var(--shadow);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            height: 70px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo-icon {
+            background: var(--gradient-primary);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 3px solid var(--secondary-color);
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
         }
 
-        .library-title {
-            font-family: 'Roboto Slab', serif;
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Source Serif Pro', serif;
             font-weight: 700;
             font-size: 1.8rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: var(--dark-color);
+            line-height: 1.2;
         }
 
-        .library-icon {
-            background: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: var(--secondary-color);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .library-subtitle {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.8);
-            display: block;
-            font-weight: 400;
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--gray-color);
+            font-weight: 500;
+            letter-spacing: 0.5px;
             margin-top: 2px;
         }
 
-        /* Sidebar/Side Header Styles */
-        .sidebar {
+        /* Modern Sidebar */
+        .modern-sidebar {
             position: fixed;
             top: 0;
-            left: -300px; /* Hidden by default */
-            width: 300px;
+            left: -320px;
+            width: 320px;
             height: 100vh;
-            background: var(--gradient-primary);
-            z-index: 1050;
-            transition: left 0.3s ease;
+            background: white;
+            z-index: 1100;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
-            padding-top: 80px; /* Space for top header */
+            box-shadow: var(--shadow-heavy);
+            border-right: 1px solid var(--light-gray);
         }
 
-        .sidebar.open {
+        .modern-sidebar.open {
             left: 0;
         }
 
@@ -125,333 +145,464 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1040;
-            backdrop-filter: blur(3px);
+            background: rgba(30, 41, 59, 0.8);
+            z-index: 1050;
+            backdrop-filter: blur(8px);
         }
 
         .sidebar-overlay.show {
             display: block;
         }
 
+        .sidebar-header {
+            padding: 2.5rem 2rem 2rem;
+            border-bottom: 1px solid var(--light-gray);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .sidebar-header h3 {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
         .sidebar-menu {
             list-style: none;
-            padding: 0;
+            padding: 2rem;
             margin: 0;
         }
 
         .sidebar-menu li {
-            margin-bottom: 5px;
+            margin-bottom: 0.5rem;
         }
 
         .sidebar-menu a {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
-            color: white;
+            padding: 1rem 1.25rem;
+            color: var(--dark-color);
             text-decoration: none;
             transition: var(--transition);
-            border-left: 4px solid transparent;
+            border-radius: 10px;
+            font-weight: 500;
         }
 
         .sidebar-menu a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 25px;
+            background: var(--light-color);
+            color: var(--primary-color);
+            transform: translateX(5px);
         }
 
         .sidebar-menu a.active {
-            background: var(--secondary-color);
-            border-left: 4px solid white;
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
         }
 
         .sidebar-menu a i {
-            width: 25px;
+            width: 24px;
             font-size: 1.1rem;
-            margin-right: 10px;
+            margin-right: 1rem;
+            color: inherit;
         }
 
         .sidebar-divider {
             height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 20px 0;
+            background: var(--light-gray);
+            margin: 1.5rem 0;
         }
 
         .sidebar-footer {
-            padding: 20px;
+            padding: 2rem;
             text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 20px;
+            color: var(--gray-color);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--light-gray);
         }
 
-        /* Toggle Button for Sidebar - Top Left */
-        .sidebar-toggle {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1060;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        /* Modern Menu Toggle */
+        .menu-toggle {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--light-gray);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: var(--shadow);
             transition: var(--transition);
+            font-size: 1.25rem;
         }
 
-        .sidebar-toggle:hover {
-            background: var(--secondary-color);
-            transform: scale(1.1);
+        .menu-toggle:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.1);
         }
 
-        .sidebar-toggle i {
-            font-size: 1.3rem;
-        }
-
-        /* Adjust main content padding for top header */
+        /* Main Content */
         .main-content {
-            padding-top: 70px; /* Same as top-header height */
+            padding-top: 80px;
         }
 
-        /* Hero Section */
-        .hero-section {
+        /* Modern Hero Section */
+        .modern-hero {
             position: relative;
-            min-height: 500px;
+            min-height: 85vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            padding: 3rem 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
         }
 
-        /* Background Image Animation */
-        .img {
+        .hero-background {
             position: absolute;
             top: 0;
             left: 0;
-            height: 100%;
             width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.98)), 
+                        url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            opacity: 0.1;
             z-index: -1;
-            animation: ani 8s infinite linear;
-            opacity: 0.9;
         }
 
-        @keyframes ani {
-            0% { background-image: url('pexels-cottonbro-4861352.jpg'); }
-            50% { background-image: url('pexels-kseniachernaya-3952078.jpg'); }
-            100% { background-image: url('https://cache.careers360.mobi/media/presets/720X480/colleges/social-media/media-gallery/13757/2018/11/29/Campus%20view%20of%20Sacred%20Heart%20Degree%20College%20Sitapur_Campus-View.jpg'); }
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 152, 219, 0.8) 100%);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
             color: white;
-            text-align: center;
-            max-width: 800px;
-            padding: 1.5rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         .hero-title {
-            font-family: 'Roboto Slab', serif;
-            font-size: 2.8rem;
+            font-family: 'Source Serif Pro', serif;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--dark-color);
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-subtitle {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
+            font-size: 1.25rem;
+            color: var(--gray-color);
+            margin-bottom: 3rem;
+            line-height: 1.6;
         }
 
-        /* Enhanced Login Section */
-        .login-section {
-            position: absolute;
-            left: 870px;
-            top: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.0rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            width: 350px;
-            margin: 1.5rem auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-        }
-
-        .login-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .login-container {
-            max-width: 350px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            font-weight: bold;
-            font-family: 'Roboto Slab', serif;
-            font-size: 1.5rem;
-        }
-
-        .input {
-            width: 100%;
-            border-radius: 8px;
-            height: 38px;
-            padding: 0 12px;
-            border: 2px solid var(--secondary-color);
+        /* Modern Login Card */
+        .login-card {
             background: white;
-            color: var(--dark-color);
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 12px;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
-        }
-
-        select {
-            width: 100%;
-            border-radius: 8px;
-            height: 38px;
-            padding: 0 12px;
-            border: 2px solid var(--secondary-color);
-            background: white;
-            color: var(--dark-color);
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .red {
-            color: var(--accent-color);
-            font-weight: 500;
-            margin-bottom: 4px;
-            display: block;
-            font-size: 0.9rem;
-        }
-
-        .login {
-            background: var(--gradient-secondary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 22px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-        }
-
-        .box1 {
-            margin-top: 15px;
-        }
-
-        .hello {
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-heavy);
+            border: 1px solid var(--light-gray);
             position: relative;
-            display: inline-block;
+            overflow: hidden;
         }
 
-        .hello::before {
+        .login-card::before {
             content: '';
             position: absolute;
-            width: 9px;
-            height: 8px;
-            background-color: var(--secondary-color);
-            top: -2px;
-            left: -15px;
-            transform: rotate(45deg);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-primary);
         }
 
-        /* Information Cards */
-        .info-section {
-            padding: 3rem 0;
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .login-header h2 {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--gray-color);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
             background: white;
-            margin-bottom: 4rem;
+            color: var(--dark-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            background-size: 20px;
+            padding-right: 3.5rem;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+        }
+
+        .forgot-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .forgot-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--accent-color);
+            background: rgba(239, 68, 68, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        /* Modern Info Section */
+        .modern-info {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray-color);
+            font-size: 1.125rem;
+            line-height: 1.6;
         }
 
         .info-card {
             background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            border: 1px solid var(--light-gray);
             height: 100%;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .info-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-heavy);
         }
 
-        .card-header {
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
             background: var(--gradient-primary);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
             color: white;
-            padding: 0.8rem;
-            border-radius: 10px 10px 0 0;
-            margin: -1.5rem -1.5rem 1.2rem -1.5rem;
-            text-align: center;
+            background: var(--gradient-primary);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
+        }
+
+        .card-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.5rem;
             font-weight: 600;
-            font-family: 'Roboto Slab', serif;
+            color: var(--dark-color);
+            margin-bottom: 1.25rem;
+        }
+
+        .card-content {
+            color: var(--gray-color);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content p {
+            margin-bottom: 1rem;
+        }
+
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        .highlight-list i {
+            color: var(--success-color);
+            margin-right: 0.75rem;
             font-size: 1.1rem;
         }
 
-        .info-text {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-        /* Marquee styling */
         .marquee-container {
+            background: linear-gradient(135deg, #f0f9ff 0%, #f8fafc 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border: 1px solid var(--light-gray);
             overflow: hidden;
-            background: var(--light-color);
-            padding: 0.8rem;
-            border-radius: 8px;
-            margin-top: 1.2rem;
         }
 
         .marquee-content {
@@ -461,10 +612,10 @@
         }
 
         .marquee-item {
-            padding: 0 1.5rem;
-            color: var(--secondary-color);
-            font-weight: 500;
-            font-size: 0.85rem;
+            padding: 0 2rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
         }
 
         @keyframes marquee {
@@ -472,128 +623,199 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Main Footer */
-        .footer {
-            background: linear-gradient(135deg, #1a2530 0%, #2c3e50 100%);
+        /* Modern Footer */
+        .modern-footer {
+            background: var(--dark-color);
             color: white;
-            padding: 3rem 0 2rem 0;
+            padding: 4rem 0 2rem;
             position: relative;
-            z-index: 10;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-secondary);
-            z-index: 1;
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
-        .footer h4 {
-            font-family: 'Roboto Slab', serif;
-            font-weight: 700;
+        .footer-column h4 {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
             color: white;
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.75rem;
         }
 
-        .footer h4::after {
+        .footer-column h4::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 40px;
-            height: 2px;
-            background: var(--gradient-secondary);
+            height: 3px;
+            background: var(--gradient-primary);
             border-radius: 2px;
         }
 
-        .footer a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.6rem;
-            transition: var(--transition);
-            font-size: 0.85rem;
+        .footer-links {
+            list-style: none;
+            padding: 0;
         }
 
-        .footer a:hover {
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
             color: white;
             transform: translateX(5px);
         }
 
-        .footer .contact-info {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .footer .contact-info i {
-            width: 20px;
-            color: var(--secondary-color);
-        }
-
-        .footer .social-links {
-            display: flex;
-            gap: 15px;
+        .contact-info {
             margin-top: 1.5rem;
         }
 
-        .footer .social-links a {
-            background: rgba(255, 255, 255, 0.1);
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
             width: 40px;
             height: 40px;
-            border-radius: 50%;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            text-decoration: none;
             transition: var(--transition);
-            margin-bottom: 0;
         }
 
-        .footer .social-links a:hover {
-            background: var(--secondary-color);
+        .social-link:hover {
+            background: var(--primary-color);
             transform: translateY(-3px);
         }
 
-        .footer .quick-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        .footer .quick-links a {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-        }
-
-        .footer .quick-links a:hover {
-            background: var(--secondary-color);
-        }
-
-        /* Error message */
-        .error-message {
-            color: #e74c3c;
-            background: rgba(231, 76, 60, 0.1);
-            padding: 0.6rem;
-            border-radius: 8px;
-            margin-top: 0.8rem;
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            border: 1px solid rgba(231, 76, 60, 0.2);
-            display: none;
-            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
         }
 
-        /* Animation for page load */
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .hero-content {
+                text-align: center;
+                max-width: 100%;
+            }
+            
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-title {
+                font-size: 2.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .modern-hero {
+                min-height: auto;
+                padding: 4rem 0;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .modern-sidebar {
+                width: 280px;
+                left: -280px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .info-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-title {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.25rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .login-card {
+                padding: 2rem;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .modern-info {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -611,7 +833,7 @@
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -619,249 +841,66 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--secondary-color);
-            border-radius: 6px;
+            background: var(--primary-color);
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-color);
-        }
-
-        /* Fixed Copyright Section Only */
-        .copyright {
-            background: var(--gradient-primary);
-            padding: 0.8rem !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .copyright p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Sidebar Registration Section */
-        .sidebar-registration {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px;
-            text-align: center;
-        }
-
-        .sidebar-registration h5 {
-            color: white;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-
-        .sidebar-registration a {
-            display: block;
             background: var(--secondary-color);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .sidebar-registration a:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 767px) {
-            body {
-                padding-bottom: 40px;
-            }
-            
-            .top-header {
-                height: 60px;
-                padding: 10px 0;
-            }
-            
-            .main-content {
-                padding-top: 60px;
-            }
-            
-            .library-title {
-                font-size: 1.4rem;
-            }
-            
-            .library-icon {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .sidebar {
-                width: 250px;
-                left: -250px;
-                padding-top: 70px;
-            }
-            
-            .sidebar-toggle {
-                top: 10px;
-                left: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .sidebar-toggle i {
-                font-size: 1.1rem;
-            }
-            
-            .login-section {
-                position: relative;
-                left: 0;
-                top: 0;
-                margin: 1rem auto;
-                max-width: 90%;
-                padding: 1rem;
-            }
-            
-            .hero-title {
-                font-size: 1.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 0.9rem;
-            }
-            
-            .info-card {
-                padding: 1.2rem;
-            }
-            
-            /* Footer Mobile */
-            .footer {
-                padding: 2rem 0 1.5rem 0;
-            }
-            
-            .copyright {
-                height: 40px;
-                padding: 0.6rem !important;
-            }
-            
-            .copyright p {
-                font-size: 0.75rem;
-            }
-            
-            .footer .social-links {
-                justify-content: center;
-                margin-top: 1rem;
-            }
-            
-            .footer .quick-links {
-                justify-content: center;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 991px) {
-            body {
-                padding-bottom: 45px;
-            }
-            
-            .sidebar {
-                width: 280px;
-            }
-            
-            .login-section {
-                position: relative;
-                left: 0;
-                top: 0;
-                margin: 1rem auto;
-                max-width: 80%;
-            }
-            
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            /* Footer Tablet */
-            .footer {
-                padding: 2.5rem 0 1.5rem 0;
-            }
-            
-            .copyright {
-                height: 45px;
-                padding: 0.7rem !important;
-            }
-        }
-
-        @media (min-width: 992px) {
-            body {
-                padding-bottom: 50px;
-            }
-            
-            .footer {
-                padding: 3.5rem 0 2rem 0;
-            }
-        }
-
-        @media (max-width: 1199px) {
-            .login-section {
-                left: 50%;
-                transform: translateX(-50%);
-                top: 320px;
-            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Top Header - Centered Library Hub -->
-    <header class="top-header">
-        <div class="library-title">
-            <div class="library-icon">
-                <i class="fas fa-book-open fa-lg"></i>
-            </div>
-            <div>
-                <span>Library Hub</span>
-                <span class="library-subtitle">Sacred Heart Degree College</span>
-            </div>
+    <!-- Modern Header -->
+    <header class="modern-header">
+        <div class="header-container">
+            <a href="#" class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-title">Library Hub</div>
+                    <div class="logo-subtitle">Sacred Heart Degree College</div>
+                </div>
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Sidebar Toggle Button - Top Left -->
-    <button class="sidebar-toggle" id="sidebarToggle">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Sidebar/Side Header -->
-    <div class="sidebar" id="sidebar">
+    <!-- Modern Sidebar -->
+    <div class="modern-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-compass mr-2"></i>Navigation</h3>
+            <p>Explore our library resources</p>
+        </div>
+        
         <ul class="sidebar-menu">
             <li><a href="index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="about_us.jsp"><i class="fas fa-info-circle"></i>About Us</a></li>
-            <li><a href="blog.jsp"><i class="fas fa-blog"></i>Blog</a></li>
-            <li><a href="timetable.jsp"><i class="fas fa-calendar-alt"></i>Time Table</a></li>
-            <li><a href="forgot_password.jsp"><i class="fas fa-key"></i>Forgot Password</a></li>
+            <li><a href="about_us.jsp"><i class="fas fa-university"></i>About College</a></li>
+            <li><a href="blog.jsp"><i class="fas fa-newspaper"></i>Blog & News</a></li>
+            <li><a href="timetable.jsp"><i class="fas fa-calendar-alt"></i>Academic Schedule</a></li>
+            <li><a href="forgot_password.jsp"><i class="fas fa-key"></i>Password Recovery</a></li>
             
             <div class="sidebar-divider"></div>
             
-            <li><a href="#"><i class="fas fa-book"></i>E-Books</a></li>
+            <li><a href="#"><i class="fas fa-book-open"></i>Digital Library</a></li>
             <li><a href="#"><i class="fas fa-file-alt"></i>Research Papers</a></li>
-            <li><a href="#"><i class="fas fa-newspaper"></i>Journals</a></li>
+            <li><a href="#"><i class="fas fa-journal-whills"></i>Academic Journals</a></li>
             <li><a href="#"><i class="fas fa-bookmark"></i>Magazines</a></li>
-            <li><a href="#"><i class="fas fa-archive"></i>Digital Archives</a></li>
+            <li><a href="#"><i class="fas fa-archive"></i>Archives</a></li>
             
             <div class="sidebar-divider"></div>
             
             <li><a href="registration.jsp"><i class="fas fa-user-plus"></i>Student Registration</a></li>
-            <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Sign Up / Login</a></li>
+            <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Login Portal</a></li>
         </ul>
         
         <div class="sidebar-footer">
-            <p>© <span id="sidebarYear"></span> Library Hub</p>
+            <p>© <span id="sidebarYear"></span> Library Management System</p>
             <p>Sacred Heart Degree College</p>
         </div>
     </div>
@@ -871,40 +910,119 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section fade-in">
-            <div class="img"></div>
-            <div class="hero-overlay"></div>
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Welcome to Sacred Heart Degree College Library</h1>
-                    <p class="hero-subtitle">A sanctuary of knowledge where education meets excellence. Explore our vast collection and immerse yourself in the world of learning.</p>
+        <!-- Modern Hero Section -->
+        <section class="modern-hero">
+            <div class="hero-background"></div>
+            <div class="hero-container fade-in">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <span class="hero-badge">
+                            <i class="fas fa-star mr-2"></i>Premier Academic Library
+                        </span>
+                        <h1 class="hero-title">
+                            Welcome to <span>Sacred Heart</span> College Library
+                        </h1>
+                        <p class="hero-subtitle">
+                            A state-of-the-art digital library system providing comprehensive academic resources, 
+                            research materials, and learning tools for students and faculty members.
+                        </p>
+                        
+                        <div class="highlight-list">
+                            <li><i class="fas fa-check-circle"></i> 50,000+ Digital Resources</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 Online Access</li>
+                            <li><i class="fas fa-check-circle"></i> Research Support Services</li>
+                            <li><i class="fas fa-check-circle"></i> Expert Librarian Assistance</li>
+                        </div>
+                    </div>
+                    
+                    <div class="login-card">
+                        <div class="login-header">
+                            <h2>Library Portal Login</h2>
+                            <p>Access your account to explore resources</p>
+                        </div>
+                        
+                        <form action="LoginServlet" method="post">
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <input type="text" id="username" name="username" required class="form-input" placeholder="Enter your username">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" id="password" name="password" required class="form-input" placeholder="Enter your password">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Role</label>
+                                <select id="role" name="role" required class="form-input form-select">
+                                    <option value="">Select Your Role</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Faculty">Faculty Member</option>
+                                    <option value="Librarian">Librarian</option>
+                                    <option value="Admin">Administrator</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </button>
+                                <button type="button" class="btn-secondary" onclick="location.href='registration.jsp'">
+                                    <i class="fas fa-user-plus"></i> Register
+                                </button>
+                            </div>
+                            
+                            <div class="forgot-link">
+                                <a href="forgot_password.jsp">
+                                    <i class="fas fa-question-circle"></i> Forgot Password?
+                                </a>
+                            </div>
+                            
+                            <div class="error-message" id="error-message">
+                                Invalid credentials. Please try again.
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Information Section -->
-        <section class="info-section">
+        <!-- Modern Info Section -->
+        <section class="modern-info">
             <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">About Our Institution</h2>
+                    <p class="section-subtitle">
+                        Sacred Heart Degree College is committed to excellence in education and providing 
+                        world-class resources for academic growth and research.
+                    </p>
+                </div>
+                
                 <div class="row">
                     <div class="col-lg-6 mb-4">
                         <div class="info-card fade-in">
-                            <div class="card-header">
-                                <i class="fas fa-university mr-2"></i>About Sacred Heart College
+                            <div class="card-icon">
+                                <i class="fas fa-university"></i>
                             </div>
-                            <p class="info-text">
-                                Sacred Heart Degree College, Sitapur, founded in 1998 is a self financed degree college of minority nature in accordance with the provisions of Article 30(1) of the Constitution of India (Rights of Minorities to establish and administer educational institutions) and affiliated to the University of Lucknow. 
-                                <br><br>
-                                Sacred Heart Degree College is one of the leading colleges of University of Lucknow and enjoys a rare social accreditation in recognition of her earnest efforts to impart value based education while upgrading herself constantly to address the ever changing demands of the Education sector.
-                            </p>
-                            
-                            <div class="marquee-container">
-                                <div class="marquee-content">
-                                    <div class="marquee-item">• Excellence in Education •</div>
-                                    <div class="marquee-item">• Value Based Learning •</div>
-                                    <div class="marquee-item">• Modern Infrastructure •</div>
-                                    <div class="marquee-item">• Expert Faculty •</div>
-                                    <div class="marquee-item">• Digital Resources •</div>
+                            <h3 class="card-title">Our College Legacy</h3>
+                            <div class="card-content">
+                                <p>
+                                    Established in 1998, Sacred Heart Degree College operates under Article 30(1) 
+                                    of the Indian Constitution and is proudly affiliated with the University of Lucknow.
+                                </p>
+                                <p>
+                                    Recognized as one of the premier institutions under Lucknow University, 
+                                    we maintain exceptional academic standards while fostering value-based education.
+                                </p>
+                                
+                                <div class="marquee-container">
+                                    <div class="marquee-content">
+                                        <div class="marquee-item">• Academic Excellence •</div>
+                                        <div class="marquee-item">• Research Focus •</div>
+                                        <div class="marquee-item">• Digital Innovation •</div>
+                                        <div class="marquee-item">• Student Success •</div>
+                                        <div class="marquee-item">• Community Engagement •</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -912,20 +1030,23 @@
                     
                     <div class="col-lg-6 mb-4">
                         <div class="info-card fade-in">
-                            <div class="card-header" style="background: var(--gradient-accent);">
-                                <i class="fas fa-book-reader mr-2"></i>Library Rules & Regulations
+                            <div class="card-icon">
+                                <i class="fas fa-book-reader"></i>
                             </div>
-                            <div class="info-text">
-                                <p><strong><i class="fas fa-clock text-primary mr-2"></i>Timings:</strong> Library will be open from 8:45 a.m. to 2:30 p.m.</p>
-                                <p><strong><i class="fas fa-volume-mute text-primary mr-2"></i>Silence:</strong> Strict silence shall be observed in the library.</p>
-                                <p><strong><i class="fas fa-book text-primary mr-2"></i>Issuance:</strong> Books will be issued only on library card.</p>
-                                <p><strong><i class="fas fa-exchange-alt text-primary mr-2"></i>Duration:</strong> Books issued for 7 days only.</p>
-                                <p><strong><i class="fas fa-exclamation-triangle text-primary mr-2"></i>Late Fees:</strong> Overdue charge of Rs. 5/- per day.</p>
-                                <p><strong><i class="fas fa-rupee-sign text-primary mr-2"></i>Card Loss:</strong> Fine of Rs. 15/- for lost library card.</p>
-                                <p><strong><i class="fas fa-ban text-primary mr-2"></i>Restrictions:</strong> No sub-lending of library books.</p>
-                                <p><strong><i class="fas fa-hand-paper text-primary mr-2"></i>Care:</strong> Handle books carefully - damage/loss requires replacement or double cost payment.</p>
-                                <p><strong><i class="fas fa-pencil-alt text-primary mr-2"></i>Markings:</strong> No marking, writing, or underlining in books.</p>
-                                <p><strong><i class="fas fa-receipt text-primary mr-2"></i>No Dues:</strong> Clear all dues before examination admit card issuance.</p>
+                            <h3 class="card-title">Library Policies</h3>
+                            <div class="card-content">
+                                <ul class="highlight-list">
+                                    <li><i class="fas fa-clock"></i> Operating Hours: 8:45 AM - 2:30 PM</li>
+                                    <li><i class="fas fa-volume-mute"></i> Maintain Silence in Library Areas</li>
+                                    <li><i class="fas fa-id-card"></i> Valid Library Card Required for Issuance</li>
+                                    <li><i class="fas fa-exchange-alt"></i> 7-Day Loan Period for Books</li>
+                                    <li><i class="fas fa-exclamation-triangle"></i> ₹5 Daily Late Return Fee</li>
+                                    <li><i class="fas fa-rupee-sign"></i> ₹15 Card Replacement Fee</li>
+                                    <li><i class="fas fa-ban"></i> No Sub-Lending of Materials</li>
+                                    <li><i class="fas fa-hand-paper"></i> Handle Resources with Care</li>
+                                    <li><i class="fas fa-pencil-alt"></i> No Markings or Writing</li>
+                                    <li><i class="fas fa-receipt"></i> Clear Dues Before Examinations</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -933,73 +1054,83 @@
             </div>
         </section>
 
-        <!-- Main Footer -->
-        <footer class="footer">
+        <!-- Modern Footer -->
+        <footer class="modern-footer">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <h4>Quick Links</h4>
-                        <a href="index.html"><i class="fas fa-chevron-right mr-2"></i>Home</a>
-                        <a href="about_us.jsp"><i class="fas fa-chevron-right mr-2"></i>About Us</a>
-                        <a href="blog.jsp"><i class="fas fa-chevron-right mr-2"></i>Blog</a>
-                        <a href="registration.jsp"><i class="fas fa-chevron-right mr-2"></i>Student Registration</a>
-                        <a href="timetable.jsp"><i class="fas fa-chevron-right mr-2"></i>Time Table</a>
-                        <a href="forgot_password.jsp"><i class="fas fa-chevron-right mr-2"></i>Forgot Password</a>
-                        <div class="quick-links">
-                            <a href="#">FAQ</a>
-                            <a href="#">Help Desk</a>
-                            <a href="#">Tutorials</a>
-                            <a href="#">Sitemap</a>
-                        </div>
+                <div class="footer-top">
+                    <div class="footer-column">
+                        <h4>Quick Access</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="about_us.jsp"><i class="fas fa-chevron-right"></i> About College</a></li>
+                            <li><a href="blog.jsp"><i class="fas fa-chevron-right"></i> Academic Blog</a></li>
+                            <li><a href="registration.jsp"><i class="fas fa-chevron-right"></i> Registration</a></li>
+                            <li><a href="timetable.jsp"><i class="fas fa-chevron-right"></i> Schedule</a></li>
+                            <li><a href="forgot_password.jsp"><i class="fas fa-chevron-right"></i> Password Help</a></li>
+                        </ul>
                     </div>
                     
-                    <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-column">
                         <h4>Resources</h4>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>E-Books</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Research Papers</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Journals</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Magazines</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Newspapers</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Digital Archives</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Library Catalog</a>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Digital Library</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Research Papers</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Academic Journals</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Magazines</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Newspapers</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Archives</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Catalog Search</a></li>
+                        </ul>
                     </div>
                     
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <h4>Contact Info</h4>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
                         <div class="contact-info">
-                            <p><i class="fas fa-map-marker-alt mr-2"></i> Sacred Heart Degree College<br>Sitapur, Uttar Pradesh</p>
-                            <p><i class="fas fa-phone mr-2"></i> +91 9876543210</p>
-                            <p><i class="fas fa-envelope mr-2"></i> library@shdc.edu.in</p>
-                            <p><i class="fas fa-clock mr-2"></i> Mon-Sat: 8:45 AM - 2:30 PM</p>
-                            <p><i class="fas fa-globe mr-2"></i> www.shdclibrary.edu.in</p>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sacred Heart Degree College<br>Sitapur, Uttar Pradesh 261001</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 (05862) 221234</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>library@shdc.edu.in</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Mon-Sat: 8:45 AM - 2:30 PM</span>
+                            </div>
                         </div>
                         <div class="social-links">
-                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                     
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <h4>College Info</h4>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Academic Calendar</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Examination Schedule</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Faculty Directory</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Administration</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Campus Facilities</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Alumni Network</a>
-                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Careers</a>
+                    <div class="footer-column">
+                        <h4>Institution</h4>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Academic Calendar</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Examination Schedule</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Faculty Directory</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Administration</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Campus Facilities</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Alumni Network</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                        </ul>
                     </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>© <span id="currentYear"></span> Library Management System | Sacred Heart Degree College | All Rights Reserved</p>
                 </div>
             </div>
         </footer>
-
-        <!-- Fixed Copyright Section Only -->
-        <div class="copyright text-center">
-            <p>© <span id="currentYear"></span> Library Hub- Sacred Heart Degree College. All rights reserved.</p>
-        </div>
     </div>
 
     <!-- Bootstrap JS -->
@@ -1008,18 +1139,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Set current year in footer
+        // Set current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         document.getElementById('sidebarYear').textContent = new Date().getFullYear();
 
         // Sidebar functionality
         const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebarToggle');
+        const menuToggle = document.getElementById('menuToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const body = document.body;
 
         // Toggle sidebar
-        sidebarToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function() {
             sidebar.classList.toggle('open');
             sidebarOverlay.classList.toggle('show');
             
@@ -1028,9 +1158,11 @@
             if (sidebar.classList.contains('open')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
+                this.style.transform = 'rotate(180deg)';
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
+                this.style.transform = 'rotate(0deg)';
             }
         });
 
@@ -1039,10 +1171,11 @@
             sidebar.classList.remove('open');
             this.classList.remove('show');
             
-            // Reset icon
-            const icon = sidebarToggle.querySelector('i');
+            // Reset button
+            const icon = menuToggle.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
+            menuToggle.style.transform = 'rotate(0deg)';
         });
 
         // Close sidebar when clicking a link on mobile
@@ -1053,15 +1186,16 @@
                     sidebar.classList.remove('open');
                     sidebarOverlay.classList.remove('show');
                     
-                    // Reset icon
-                    const icon = sidebarToggle.querySelector('i');
+                    // Reset button
+                    const icon = menuToggle.querySelector('i');
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
+                    menuToggle.style.transform = 'rotate(0deg)';
                 });
             });
         }
 
-        // Active link highlighting for sidebar
+        // Active link highlighting
         $(document).ready(function() {
             var currentPage = window.location.pathname.split('/').pop();
             
@@ -1074,7 +1208,7 @@
                 }
             });
 
-            // Login form validation
+            // Form validation
             $('form').on('submit', function(e) {
                 var username = $('#username').val().trim();
                 var password = $('#password').val().trim();
@@ -1083,11 +1217,17 @@
                 
                 if (!username || !password || !role) {
                     e.preventDefault();
-                    errorMessage.text('Please fill in all fields').show();
+                    errorMessage.text('Please complete all required fields').show();
                     return false;
                 }
                 
-                // Additional validation can be added here
+                // Additional validation
+                if (password.length < 6) {
+                    e.preventDefault();
+                    errorMessage.text('Password must be at least 6 characters').show();
+                    return false;
+                }
+                
                 return true;
             });
 
@@ -1108,28 +1248,32 @@
             $(window).on('scroll', checkScroll);
             checkScroll();
 
-            // Keyboard shortcuts for sidebar
+            // Keyboard shortcuts
             $(document).keydown(function(e) {
-                // Ctrl + B to toggle sidebar
-                if (e.ctrlKey && e.key === 'b') {
-                    e.preventDefault();
-                    sidebarToggle.click();
-                }
-                
-                // Escape key to close sidebar
+                // Escape to close sidebar
                 if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-                    sidebarToggle.click();
+                    menuToggle.click();
                 }
             });
 
-            // Make sidebar toggle accessible
-            sidebarToggle.setAttribute('aria-label', 'Toggle sidebar menu');
-            sidebarToggle.setAttribute('aria-expanded', 'false');
+            // Accessibility
+            menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
+            menuToggle.setAttribute('aria-expanded', 'false');
             
-            // Update aria-expanded attribute
-            sidebarToggle.addEventListener('click', function() {
+            menuToggle.addEventListener('click', function() {
                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
                 this.setAttribute('aria-expanded', !isExpanded);
+            });
+
+            // Smooth scroll for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                if (this.hash !== "") {
+                    e.preventDefault();
+                    const hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 80
+                    }, 800);
+                }
             });
         });
     </script>
