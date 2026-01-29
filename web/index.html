@@ -43,188 +43,192 @@
             background: var(--light-color);
             color: #333;
             line-height: 1.6;
-            padding-top: 70px; /* Reduced from 120px */
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
-            padding-bottom: 50px; /* Space for fixed copyright only */
+            padding-bottom: 50px;
+            transition: margin-left 0.3s ease;
         }
 
-        /* Reduced Navbar Height */
-        .navbar {
+        /* Top Header - Centered Library Hub */
+        .top-header {
             background: var(--gradient-primary);
-            padding: 0.3rem 1.2rem; /* Reduced padding */
+            padding: 15px 0;
+            text-align: center;
             box-shadow: var(--shadow);
-            transition: var(--transition);
-            height: 70px; /* Fixed height */
-            min-height: 70px; /* Fixed min-height */
-            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-bottom: 3px solid var(--secondary-color);
         }
 
-        .navbar.scrolled {
-            padding: 0.3rem 1rem; /* Reduced padding */
-        }
-
-        .navbar-brand {
+        .library-title {
             font-family: 'Roboto Slab', serif;
             font-weight: 700;
-            font-size: 1.5rem !important; /* Reduced font size */
+            font-size: 1.8rem;
+            color: white;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
 
-        .brand-icon {
+        .library-icon {
             background: white;
-            width: 35px; /* Reduced size */
-            height: 35px; /* Reduced size */
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px; /* Reduced margin */
+            margin-right: 15px;
             color: var(--secondary-color);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: var(--transition);
         }
 
-        .brand-text {
-            color: white;
-            font-size: 1.4rem; /* Reduced font size */
-            letter-spacing: 0.3px;
-        }
-
-        .brand-subtext {
-            font-size: 0.6rem; /* Reduced font size */
+        .library-subtitle {
+            font-size: 0.7rem;
             color: rgba(255,255,255,0.8);
             display: block;
             font-weight: 400;
+            margin-top: 2px;
         }
 
-        .navbar-toggler {
-            border: 2px solid white;
-            padding: 0.4rem; /* Reduced padding */
-            transition: var(--transition);
-            order: 3;
-            margin-left: auto;
-        }
-
-        .navbar-toggler:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-            width: 24px; /* Reduced size */
-            height: 24px; /* Reduced size */
-        }
-
-        /* Navbar hover effect - adjusted for smaller height */
-        .nav-link {
-            color: white !important;
-            font-weight: 500;
-            padding: 0.4rem 1rem !important; /* Reduced padding */
-            margin: 0 0.3rem; /* Reduced margin */
-            border-radius: 20px;
-            transition: background-color 0.3s, color 0.3s;
-            position: relative;
-            font-size: 0.9rem; /* Reduced font size */
-        }
-        
-        .nav-link:hover {
-            background-color: var(--secondary-color);
-            color: white !important;
-            text-decoration: none;
-            transform: translateY(-2px);
-        }
-
-        .nav-link.active {
-            background: var(--secondary-color);
-            color: white !important;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-        }
-
-        /* Registration Tooltip */
-        .registration {
-            position: relative;
-        }
-
-        .registration-tooltip {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            padding: 1rem; /* Reduced padding */
-            width: 260px; /* Reduced width */
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s, transform 0.3s;
-            border: 1px solid #eee;
-        }
-
-        .registration:hover .registration-tooltip {
-            display: block;
-            opacity: 1;
-            transform: translateY(5px);
-        }
-
-        .registration-tooltip::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            right: 20px;
-            width: 16px;
-            height: 16px;
-            background: white;
-            transform: rotate(45deg);
-            border-left: 1px solid #eee;
-            border-top: 1px solid #eee;
-        }
-
-        .tooltip-header {
+        /* Sidebar/Side Header Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Hidden by default */
+            width: 300px;
+            height: 100vh;
             background: var(--gradient-primary);
-            color: white;
-            padding: 0.6rem; /* Reduced padding */
-            border-radius: 8px;
-            margin-bottom: 0.8rem; /* Reduced margin */
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.9rem; /* Reduced font size */
+            z-index: 1050;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            padding-top: 80px; /* Space for top header */
         }
 
-        .tooltip-link {
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            backdrop-filter: blur(3px);
+        }
+
+        .sidebar-overlay.show {
             display: block;
-            padding: 0.6rem; /* Reduced padding */
-            margin: 0.3rem 0; /* Reduced margin */
-            background: #f8f9fa;
-            border-radius: 6px;
-            color: var(--dark-color);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
             text-decoration: none;
             transition: var(--transition);
             border-left: 4px solid transparent;
-            font-size: 0.85rem; /* Reduced font size */
         }
 
-        .tooltip-link:hover {
-            background: var(--light-color);
-            color: var(--secondary-color);
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-left: 4px solid var(--secondary-color);
-            transform: translateX(5px);
+            padding-left: 25px;
+        }
+
+        .sidebar-menu a.active {
+            background: var(--secondary-color);
+            border-left: 4px solid white;
+        }
+
+        .sidebar-menu a i {
+            width: 25px;
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        /* Toggle Button for Sidebar - Top Left */
+        .sidebar-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1060;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .sidebar-toggle i {
+            font-size: 1.3rem;
+        }
+
+        /* Adjust main content padding for top header */
+        .main-content {
+            padding-top: 70px; /* Same as top-header height */
         }
 
         /* Hero Section */
         .hero-section {
             position: relative;
-            min-height: 500px; /* Reduced height */
+            min-height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            padding: 3rem 0; /* Reduced padding */
+            padding: 3rem 0;
         }
 
         /* Background Image Animation */
@@ -263,20 +267,20 @@
             color: white;
             text-align: center;
             max-width: 800px;
-            padding: 1.5rem; /* Reduced padding */
+            padding: 1.5rem;
         }
 
         .hero-title {
             font-family: 'Roboto Slab', serif;
-            font-size: 2.8rem; /* Reduced font size */
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-subtitle {
-            font-size: 1rem; /* Reduced font size */
-            margin-bottom: 1.5rem; /* Reduced margin */
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
             opacity: 0.9;
         }
 
@@ -286,12 +290,12 @@
             left: 870px;
             top: 8px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 1.0rem; /* Reduced padding */
+            padding: 1.0rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            width: 350px; /* Reduced width */
-            margin: 1.5rem auto; /* Reduced margin */
+            width: 350px;
+            margin: 1.5rem auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
         }
@@ -302,10 +306,10 @@
         }
 
         .login-container {
-            max-width: 350px; /* Reduced width */
+            max-width: 350px;
             margin: 0 auto;
             background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px; /* Reduced padding */
+            padding: 20px;
             border-radius: 15px;
             box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
@@ -313,25 +317,25 @@
 
         .login-container h2 {
             text-align: center;
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 20px;
             color: var(--primary-color);
             font-weight: bold;
             font-family: 'Roboto Slab', serif;
-            font-size: 1.5rem; /* Reduced font size */
+            font-size: 1.5rem;
         }
 
         .input {
             width: 100%;
             border-radius: 8px;
-            height: 38px; /* Reduced height */
-            padding: 0 12px; /* Reduced padding */
+            height: 38px;
+            padding: 0 12px;
             border: 2px solid var(--secondary-color);
             background: white;
             color: var(--dark-color);
             font-family: 'Poppins', sans-serif;
-            margin-bottom: 12px; /* Reduced margin */
+            margin-bottom: 12px;
             transition: var(--transition);
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
         }
 
         .input:focus {
@@ -343,23 +347,23 @@
         select {
             width: 100%;
             border-radius: 8px;
-            height: 38px; /* Reduced height */
-            padding: 0 12px; /* Reduced padding */
+            height: 38px;
+            padding: 0 12px;
             border: 2px solid var(--secondary-color);
             background: white;
             color: var(--dark-color);
             font-family: 'Poppins', sans-serif;
-            margin-bottom: 12px; /* Reduced margin */
+            margin-bottom: 12px;
             cursor: pointer;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
         }
 
         .red {
             color: var(--accent-color);
             font-weight: 500;
-            margin-bottom: 4px; /* Reduced margin */
+            margin-bottom: 4px;
             display: block;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
         }
 
         .login {
@@ -367,9 +371,9 @@
             color: white;
             border: none;
             border-radius: 8px;
-            padding: 8px 22px; /* Reduced padding */
+            padding: 8px 22px;
             font-weight: 600;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
             cursor: pointer;
             transition: var(--transition);
             font-family: 'Poppins', sans-serif;
@@ -382,7 +386,7 @@
         }
 
         .box1 {
-            margin-top: 15px; /* Reduced margin */
+            margin-top: 15px;
         }
 
         .hello {
@@ -403,16 +407,16 @@
 
         /* Information Cards */
         .info-section {
-            padding: 3rem 0; /* Reduced padding */
+            padding: 3rem 0;
             background: white;
-            margin-bottom: 4rem; /* Added margin to prevent content from being hidden behind footer */
+            margin-bottom: 4rem;
         }
 
         .info-card {
             background: white;
             border-radius: 15px;
-            padding: 1.5rem; /* Reduced padding */
-            margin-bottom: 1.5rem; /* Reduced margin */
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
             height: 100%;
@@ -426,28 +430,28 @@
         .card-header {
             background: var(--gradient-primary);
             color: white;
-            padding: 0.8rem; /* Reduced padding */
+            padding: 0.8rem;
             border-radius: 10px 10px 0 0;
-            margin: -1.5rem -1.5rem 1.2rem -1.5rem; /* Reduced margin */
+            margin: -1.5rem -1.5rem 1.2rem -1.5rem;
             text-align: center;
             font-weight: 600;
             font-family: 'Roboto Slab', serif;
-            font-size: 1.1rem; /* Reduced font size */
+            font-size: 1.1rem;
         }
 
         .info-text {
             color: #555;
             line-height: 1.6;
-            font-size: 0.9rem; /* Reduced font size */
+            font-size: 0.9rem;
         }
 
         /* Marquee styling */
         .marquee-container {
             overflow: hidden;
             background: var(--light-color);
-            padding: 0.8rem; /* Reduced padding */
+            padding: 0.8rem;
             border-radius: 8px;
-            margin-top: 1.2rem; /* Reduced margin */
+            margin-top: 1.2rem;
         }
 
         .marquee-content {
@@ -457,10 +461,10 @@
         }
 
         .marquee-item {
-            padding: 0 1.5rem; /* Reduced padding */
+            padding: 0 1.5rem;
             color: var(--secondary-color);
             font-weight: 500;
-            font-size: 0.85rem; /* Reduced font size */
+            font-size: 0.85rem;
         }
 
         @keyframes marquee {
@@ -468,12 +472,12 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Main Footer - NOT fixed */
+        /* Main Footer */
         .footer {
             background: linear-gradient(135deg, #1a2530 0%, #2c3e50 100%);
             color: white;
-            padding: 3rem 0 2rem 0; /* Increased padding for more content */
-            position: relative; /* Changed from fixed to relative */
+            padding: 3rem 0 2rem 0;
+            position: relative;
             z-index: 10;
         }
 
@@ -483,7 +487,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px; /* Reduced height */
+            height: 3px;
             background: var(--gradient-secondary);
             z-index: 1;
         }
@@ -492,10 +496,10 @@
             font-family: 'Roboto Slab', serif;
             font-weight: 700;
             color: white;
-            margin-bottom: 1.2rem; /* Increased margin */
-            font-size: 1.1rem; /* Reduced font size */
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
             position: relative;
-            padding-bottom: 0.5rem; /* Reduced padding */
+            padding-bottom: 0.5rem;
         }
 
         .footer h4::after {
@@ -503,8 +507,8 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 40px; /* Reduced width */
-            height: 2px; /* Reduced height */
+            width: 40px;
+            height: 2px;
             background: var(--gradient-secondary);
             border-radius: 2px;
         }
@@ -513,9 +517,9 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             display: block;
-            margin-bottom: 0.6rem; /* Increased margin */
+            margin-bottom: 0.6rem;
             transition: var(--transition);
-            font-size: 0.85rem; /* Reduced font size */
+            font-size: 0.85rem;
         }
 
         .footer a:hover {
@@ -576,27 +580,17 @@
             background: var(--secondary-color);
         }
 
-        /* Map Container */
-        .map-container {
-            margin: 2rem auto; /* Reduced margin */
-            width: 100%;
-            max-width: 700px; /* Reduced width */
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
         /* Error message */
         .error-message {
             color: #e74c3c;
             background: rgba(231, 76, 60, 0.1);
-            padding: 0.6rem; /* Reduced padding */
+            padding: 0.6rem;
             border-radius: 8px;
-            margin-top: 0.8rem; /* Reduced margin */
+            margin-top: 0.8rem;
             text-align: center;
             border: 1px solid rgba(231, 76, 60, 0.2);
             display: none;
-            font-size: 0.85rem; /* Reduced font size */
+            font-size: 0.85rem;
         }
 
         /* Animation for page load */
@@ -617,7 +611,7 @@
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px; /* Reduced width */
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
@@ -636,13 +630,13 @@
         /* Fixed Copyright Section Only */
         .copyright {
             background: var(--gradient-primary);
-            padding: 0.8rem !important; /* Reduced padding */
+            padding: 0.8rem !important;
             border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-            position: fixed; /* Fixed position */
+            position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50px; /* Fixed height for copyright section */
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -651,84 +645,115 @@
 
         .copyright p {
             margin: 0;
-            font-size: 0.85rem; /* Reduced font size */
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Sidebar Registration Section */
+        .sidebar-registration {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .sidebar-registration h5 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .sidebar-registration a {
+            display: block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar-registration a:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
         }
 
         /* Responsive Design */
         @media (max-width: 767px) {
             body {
-                padding-top: 60px; /* Reduced from 100px */
-                padding-bottom: 40px; /* Adjusted for fixed copyright only */
+                padding-bottom: 40px;
             }
             
-            .navbar {
-                padding: 0.3rem 1rem;
-                min-height: 60px;
+            .top-header {
                 height: 60px;
+                padding: 10px 0;
             }
             
-            .navbar-collapse {
-                background: var(--gradient-primary);
-                padding: 0.8rem; /* Reduced padding */
-                border-radius: 0 0 15px 15px;
-                margin-top: 0.3rem; /* Reduced margin */
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                order: 4;
-                width: 100%;
+            .main-content {
+                padding-top: 60px;
             }
             
-            .nav-link {
-                text-align: center;
-                margin: 0.2rem 0; /* Reduced margin */
-                padding: 0.4rem !important; /* Reduced padding */
-                width: 100%;
+            .library-title {
+                font-size: 1.4rem;
+            }
+            
+            .library-icon {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .sidebar {
+                width: 250px;
+                left: -250px;
+                padding-top: 70px;
+            }
+            
+            .sidebar-toggle {
+                top: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .sidebar-toggle i {
+                font-size: 1.1rem;
             }
             
             .login-section {
+                position: relative;
+                left: 0;
+                top: 0;
                 margin: 1rem auto;
                 max-width: 90%;
-                padding: 1rem; /* Reduced padding */
+                padding: 1rem;
             }
             
             .hero-title {
-                font-size: 1.5rem; /* Reduced font size */
+                font-size: 1.5rem;
             }
             
             .hero-subtitle {
-                font-size: 0.9rem; /* Reduced font size */
-            }
-            
-            .navbar-brand {
-                font-size: 1.1rem !important; /* Reduced font size */
-                order: 1;
-            }
-            
-            .brand-icon {
-                width: 30px; /* Reduced size */
-                height: 30px; /* Reduced size */
-            }
-            
-            .brand-text {
-                font-size: 1.1rem; /* Reduced font size */
+                font-size: 0.9rem;
             }
             
             .info-card {
-                padding: 1.2rem; /* Reduced padding */
+                padding: 1.2rem;
             }
             
             /* Footer Mobile */
             .footer {
-                padding: 2rem 0 1.5rem 0; /* Reduced padding */
+                padding: 2rem 0 1.5rem 0;
             }
             
             .copyright {
-                height: 40px; /* Reduced height for mobile */
-                padding: 0.6rem !important; /* Reduced padding */
+                height: 40px;
+                padding: 0.6rem !important;
             }
             
             .copyright p {
-                font-size: 0.75rem; /* Reduced font size */
+                font-size: 0.75rem;
             }
             
             .footer .social-links {
@@ -743,288 +768,238 @@
 
         @media (min-width: 768px) and (max-width: 991px) {
             body {
-                padding-top: 70px; /* Reduced from 110px */
-                padding-bottom: 45px; /* Adjusted for fixed copyright only */
+                padding-bottom: 45px;
             }
             
-            .navbar-collapse {
-                background: var(--gradient-primary);
-                padding: 1rem; /* Reduced padding */
-                border-radius: 0 0 15px 15px;
-                margin-top: 0.3rem; /* Reduced margin */
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                order: 4;
-                width: 100%;
+            .sidebar {
+                width: 280px;
             }
             
             .login-section {
+                position: relative;
+                left: 0;
+                top: 0;
                 margin: 1rem auto;
                 max-width: 80%;
             }
             
             .hero-title {
-                font-size: 2.2rem; /* Reduced font size */
-            }
-            
-            .nav-link {
-                text-align: center;
-                margin: 0.3rem 0; /* Reduced margin */
-            }
-            
-            .navbar-toggler {
-                order: 2;
+                font-size: 2.2rem;
             }
             
             /* Footer Tablet */
             .footer {
-                padding: 2.5rem 0 1.5rem 0; /* Reduced padding */
+                padding: 2.5rem 0 1.5rem 0;
             }
             
             .copyright {
-                height: 45px; /* Reduced height */
-                padding: 0.7rem !important; /* Reduced padding */
+                height: 45px;
+                padding: 0.7rem !important;
             }
         }
 
         @media (min-width: 992px) {
             body {
-                padding-bottom: 50px; /* Space for fixed copyright only */
-            }
-            
-            .navbar-collapse {
-                display: flex !important;
-                align-items: center;
-                order: 2;
-                flex: 1;
-            }
-            
-            .login-section {
-                order: 3;
-                margin-left: auto;
-                margin-right: 0;
+                padding-bottom: 50px;
             }
             
             .footer {
-                padding: 3.5rem 0 2rem 0; /* Increased padding */
+                padding: 3.5rem 0 2rem 0;
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .login-section {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 320px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Enhanced Navbar with reduced height -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <!-- Brand Logo -->
-            <a class="navbar-brand" href="#">
-                <div class="brand-icon">
-                    <i class="fas fa-book-open fa-lg"></i>
-                </div>
-                <div>
-                    <span class="brand-text">Library Hub</span>
-                    <span class="brand-subtext">Sacred Heart Degree College</span>
-                </div>
-            </a>
+    <!-- Top Header - Centered Library Hub -->
+    <header class="top-header">
+        <div class="library-title">
+            <div class="library-icon">
+                <i class="fas fa-book-open fa-lg"></i>
+            </div>
+            <div>
+                <span>Library Hub</span>
+                <span class="library-subtitle">Sacred Heart Degree College</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Toggle Button - Top Left -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar/Side Header -->
+    <div class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="about_us.jsp"><i class="fas fa-info-circle"></i>About Us</a></li>
+            <li><a href="blog.jsp"><i class="fas fa-blog"></i>Blog</a></li>
+            <li><a href="timetable.jsp"><i class="fas fa-calendar-alt"></i>Time Table</a></li>
+            <li><a href="forgot_password.jsp"><i class="fas fa-key"></i>Forgot Password</a></li>
             
-            <!-- Mobile Toggle Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navigation Menu -->
-            <div class="collapse navbar-collapse" id="navbarMain">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about_us.jsp">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.jsp">Blog</a>
-                    </li>
-                    <li class="nav-item registration">
-                        <div class="nav-link registration-btn">
-                            <i class="fas fa-user-plus mr-2"></i>Student Portal
-                        </div>
-                        <div class="registration-tooltip">
-                            <a href="Registration.jsp" class="tooltip-link">
-                                <i class="fas fa-user-edit mr-2"></i>Register Here!
-                            </a>
-                            <a href="login.jsp" class="tooltip-link">
-                                <i class="fas fa-user-edit mr-2"></i>Sign Up!
-                            </a>
-                            <a href="timetable.jsp" class="tooltip-link">
-                                <i class="fas fa-calendar-alt mr-2"></i>See Time Table
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section fade-in">
-        <div class="img"></div>
-        <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Welcome to Sacred Heart Degree College Library</h1>
-                <p class="hero-subtitle">A sanctuary of knowledge where education meets excellence. Explore our vast collection and immerse yourself in the world of learning.</p>
-            </div>
-        </div>
+            <div class="sidebar-divider"></div>
+            
+            <li><a href="#"><i class="fas fa-book"></i>E-Books</a></li>
+            <li><a href="#"><i class="fas fa-file-alt"></i>Research Papers</a></li>
+            <li><a href="#"><i class="fas fa-newspaper"></i>Journals</a></li>
+            <li><a href="#"><i class="fas fa-bookmark"></i>Magazines</a></li>
+            <li><a href="#"><i class="fas fa-archive"></i>Digital Archives</a></li>
+            
+            <div class="sidebar-divider"></div>
+            
+            <li><a href="registration.jsp"><i class="fas fa-user-plus"></i>Student Registration</a></li>
+            <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Sign Up / Login</a></li>
+        </ul>
         
-        <!-- Enhanced Login Section with your original form -->
-        <div class="login-section">
-            <div class="login-container">
-                <h2>Login to Library Portal</h2>
-                <form action="LoginServlet" method="post">
-                    <label for="username" class="red">Username:</label>
-                    <input type="text" id="username" name="username" required class="input" placeholder="Enter your username">
-                    <br>
-                    <label for="password" class="red">Password:</label>
-                    <input type="password" id="password" name="password" required class="input" placeholder="Enter your password">
-                    <br>
-                    <label for="role" class="red">Role:</label>
-                    <select id="role" name="role" required class="input">
-                        <option value="">Select Role</option>
-                        <option value="Librarian">Librarian</option>
-                        <option value="Student">Student</option>
-                    </select>
-                    <br>
-                    <div class="box1">
-                        <div class="hello">
-                            <input type="submit" value="Login" class="login">
+        <div class="sidebar-footer">
+            <p>© <span id="sidebarYear"></span> Library Hub</p>
+            <p>Sacred Heart Degree College</p>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section fade-in">
+            <div class="img"></div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Welcome to Sacred Heart Degree College Library</h1>
+                    <p class="hero-subtitle">A sanctuary of knowledge where education meets excellence. Explore our vast collection and immerse yourself in the world of learning.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Section -->
+        <section class="info-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="info-card fade-in">
+                            <div class="card-header">
+                                <i class="fas fa-university mr-2"></i>About Sacred Heart College
+                            </div>
+                            <p class="info-text">
+                                Sacred Heart Degree College, Sitapur, founded in 1998 is a self financed degree college of minority nature in accordance with the provisions of Article 30(1) of the Constitution of India (Rights of Minorities to establish and administer educational institutions) and affiliated to the University of Lucknow. 
+                                <br><br>
+                                Sacred Heart Degree College is one of the leading colleges of University of Lucknow and enjoys a rare social accreditation in recognition of her earnest efforts to impart value based education while upgrading herself constantly to address the ever changing demands of the Education sector.
+                            </p>
+                            
+                            <div class="marquee-container">
+                                <div class="marquee-content">
+                                    <div class="marquee-item">• Excellence in Education •</div>
+                                    <div class="marquee-item">• Value Based Learning •</div>
+                                    <div class="marquee-item">• Modern Infrastructure •</div>
+                                    <div class="marquee-item">• Expert Faculty •</div>
+                                    <div class="marquee-item">• Digital Resources •</div>
+                                </div>
+                            </div>
                         </div>
-                            <a href="forgot_password.jsp" style="color: var(--secondary-color); text-decoration: none;">
-                        <i class="fas fa-key mr-1"></i>   Forgot Password?
-                    </a>
                     </div>
                     
-                    <br>
-                    <div class="error-message" id="error-message">Invalid username or password.</div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Information Section -->
-    <section class="info-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="info-card fade-in">
-                        <div class="card-header">
-                            <i class="fas fa-university mr-2"></i>About Sacred Heart College
-                        </div>
-                        <p class="info-text">
-                            Sacred Heart Degree College, Sitapur, founded in 1998 is a self financed degree college of minority nature in accordance with the provisions of Article 30(1) of the Constitution of India (Rights of Minorities to establish and administer educational institutions) and affiliated to the University of Lucknow. 
-                            <br><br>
-                            Sacred Heart Degree College is one of the leading colleges of University of Lucknow and enjoys a rare social accreditation in recognition of her earnest efforts to impart value based education while upgrading herself constantly to address the ever changing demands of the Education sector.
-                        </p>
-                        
-                        <div class="marquee-container">
-                            <div class="marquee-content">
-                                <div class="marquee-item">• Excellence in Education •</div>
-                                <div class="marquee-item">• Value Based Learning •</div>
-                                <div class="marquee-item">• Modern Infrastructure •</div>
-                                <div class="marquee-item">• Expert Faculty •</div>
-                                <div class="marquee-item">• Digital Resources •</div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="info-card fade-in">
+                            <div class="card-header" style="background: var(--gradient-accent);">
+                                <i class="fas fa-book-reader mr-2"></i>Library Rules & Regulations
+                            </div>
+                            <div class="info-text">
+                                <p><strong><i class="fas fa-clock text-primary mr-2"></i>Timings:</strong> Library will be open from 8:45 a.m. to 2:30 p.m.</p>
+                                <p><strong><i class="fas fa-volume-mute text-primary mr-2"></i>Silence:</strong> Strict silence shall be observed in the library.</p>
+                                <p><strong><i class="fas fa-book text-primary mr-2"></i>Issuance:</strong> Books will be issued only on library card.</p>
+                                <p><strong><i class="fas fa-exchange-alt text-primary mr-2"></i>Duration:</strong> Books issued for 7 days only.</p>
+                                <p><strong><i class="fas fa-exclamation-triangle text-primary mr-2"></i>Late Fees:</strong> Overdue charge of Rs. 5/- per day.</p>
+                                <p><strong><i class="fas fa-rupee-sign text-primary mr-2"></i>Card Loss:</strong> Fine of Rs. 15/- for lost library card.</p>
+                                <p><strong><i class="fas fa-ban text-primary mr-2"></i>Restrictions:</strong> No sub-lending of library books.</p>
+                                <p><strong><i class="fas fa-hand-paper text-primary mr-2"></i>Care:</strong> Handle books carefully - damage/loss requires replacement or double cost payment.</p>
+                                <p><strong><i class="fas fa-pencil-alt text-primary mr-2"></i>Markings:</strong> No marking, writing, or underlining in books.</p>
+                                <p><strong><i class="fas fa-receipt text-primary mr-2"></i>No Dues:</strong> Clear all dues before examination admit card issuance.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-6 mb-4">
-                    <div class="info-card fade-in">
-                        <div class="card-header" style="background: var(--gradient-accent);">
-                            <i class="fas fa-book-reader mr-2"></i>Library Rules & Regulations
+            </div>
+        </section>
+
+        <!-- Main Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h4>Quick Links</h4>
+                        <a href="index.html"><i class="fas fa-chevron-right mr-2"></i>Home</a>
+                        <a href="about_us.jsp"><i class="fas fa-chevron-right mr-2"></i>About Us</a>
+                        <a href="blog.jsp"><i class="fas fa-chevron-right mr-2"></i>Blog</a>
+                        <a href="registration.jsp"><i class="fas fa-chevron-right mr-2"></i>Student Registration</a>
+                        <a href="timetable.jsp"><i class="fas fa-chevron-right mr-2"></i>Time Table</a>
+                        <a href="forgot_password.jsp"><i class="fas fa-chevron-right mr-2"></i>Forgot Password</a>
+                        <div class="quick-links">
+                            <a href="#">FAQ</a>
+                            <a href="#">Help Desk</a>
+                            <a href="#">Tutorials</a>
+                            <a href="#">Sitemap</a>
                         </div>
-                        <div class="info-text">
-                            <p><strong><i class="fas fa-clock text-primary mr-2"></i>Timings:</strong> Library will be open from 8:45 a.m. to 2:30 p.m.</p>
-                            <p><strong><i class="fas fa-volume-mute text-primary mr-2"></i>Silence:</strong> Strict silence shall be observed in the library.</p>
-                            <p><strong><i class="fas fa-book text-primary mr-2"></i>Issuance:</strong> Books will be issued only on library card.</p>
-                            <p><strong><i class="fas fa-exchange-alt text-primary mr-2"></i>Duration:</strong> Books issued for 7 days only.</p>
-                            <p><strong><i class="fas fa-exclamation-triangle text-primary mr-2"></i>Late Fees:</strong> Overdue charge of Rs. 5/- per day.</p>
-                            <p><strong><i class="fas fa-rupee-sign text-primary mr-2"></i>Card Loss:</strong> Fine of Rs. 15/- for lost library card.</p>
-                            <p><strong><i class="fas fa-ban text-primary mr-2"></i>Restrictions:</strong> No sub-lending of library books.</p>
-                            <p><strong><i class="fas fa-hand-paper text-primary mr-2"></i>Care:</strong> Handle books carefully - damage/loss requires replacement or double cost payment.</p>
-                            <p><strong><i class="fas fa-pencil-alt text-primary mr-2"></i>Markings:</strong> No marking, writing, or underlining in books.</p>
-                            <p><strong><i class="fas fa-receipt text-primary mr-2"></i>No Dues:</strong> Clear all dues before examination admit card issuance.</p>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h4>Resources</h4>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>E-Books</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Research Papers</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Journals</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Magazines</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Newspapers</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Digital Archives</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Library Catalog</a>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h4>Contact Info</h4>
+                        <div class="contact-info">
+                            <p><i class="fas fa-map-marker-alt mr-2"></i> Sacred Heart Degree College<br>Sitapur, Uttar Pradesh</p>
+                            <p><i class="fas fa-phone mr-2"></i> +91 9876543210</p>
+                            <p><i class="fas fa-envelope mr-2"></i> library@shdc.edu.in</p>
+                            <p><i class="fas fa-clock mr-2"></i> Mon-Sat: 8:45 AM - 2:30 PM</p>
+                            <p><i class="fas fa-globe mr-2"></i> www.shdclibrary.edu.in</p>
                         </div>
+                        <div class="social-links">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h4>College Info</h4>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Academic Calendar</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Examination Schedule</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Faculty Directory</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Administration</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Campus Facilities</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Alumni Network</a>
+                        <a href="#"><i class="fas fa-chevron-right mr-2"></i>Careers</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </footer>
 
-    <!-- Main Footer (not fixed) -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Quick Links</h4>
-                    <a href="index.html"><i class="fas fa-chevron-right mr-2"></i>Home</a>
-                    <a href="about_us.jsp"><i class="fas fa-chevron-right mr-2"></i>About Us</a>
-                    <a href="blog.jsp"><i class="fas fa-chevron-right mr-2"></i>Blog</a>
-                    <a href="registration.jsp"><i class="fas fa-chevron-right mr-2"></i>Student Registration</a>
-                    <a href="timetable.jsp"><i class="fas fa-chevron-right mr-2"></i>Time Table</a>
-                    <a href="forgot_password.jsp"><i class="fas fa-chevron-right mr-2"></i>Forgot Password</a>
-                    <div class="quick-links">
-                        <a href="#">FAQ</a>
-                        <a href="#">Help Desk</a>
-                        <a href="#">Tutorials</a>
-                        <a href="#">Sitemap</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Resources</h4>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>E-Books</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Research Papers</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Journals</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Magazines</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Newspapers</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Digital Archives</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Library Catalog</a>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Contact Info</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt mr-2"></i> Sacred Heart Degree College<br>Sitapur, Uttar Pradesh</p>
-                        <p><i class="fas fa-phone mr-2"></i> +91 9876543210</p>
-                        <p><i class="fas fa-envelope mr-2"></i> library@shdc.edu.in</p>
-                        <p><i class="fas fa-clock mr-2"></i> Mon-Sat: 8:45 AM - 2:30 PM</p>
-                        <p><i class="fas fa-globe mr-2"></i> www.shdclibrary.edu.in</p>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>College Info</h4>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Academic Calendar</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Examination Schedule</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Faculty Directory</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Administration</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Campus Facilities</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Alumni Network</a>
-                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Careers</a>
-                </div>
-            </div>
+        <!-- Fixed Copyright Section Only -->
+        <div class="copyright text-center">
+            <p>© <span id="currentYear"></span> Library Hub- Sacred Heart Degree College. All rights reserved.</p>
         </div>
-    </footer>
-
-    <!-- Fixed Copyright Section Only -->
-    <div class="copyright text-center">
-        <p>© <span id="currentYear"></span> Library Hub- Sacred Heart Degree College. All rights reserved.</p>
     </div>
 
     <!-- Bootstrap JS -->
@@ -1035,31 +1010,67 @@
     <script>
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.getElementById('sidebarYear').textContent = new Date().getFullYear();
 
-        // Navbar scroll effect
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > 30) { // Reduced threshold
-                $('.navbar').addClass('scrolled');
+        // Sidebar functionality
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const body = document.body;
+
+        // Toggle sidebar
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('show');
+            
+            // Change icon
+            const icon = this.querySelector('i');
+            if (sidebar.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
             } else {
-                $('.navbar').removeClass('scrolled');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
 
-        // Active link highlighting
+        // Close sidebar when clicking overlay
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            this.classList.remove('show');
+            
+            // Reset icon
+            const icon = sidebarToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+
+        // Close sidebar when clicking a link on mobile
+        if (window.innerWidth < 992) {
+            const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('show');
+                    
+                    // Reset icon
+                    const icon = sidebarToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // Active link highlighting for sidebar
         $(document).ready(function() {
             var currentPage = window.location.pathname.split('/').pop();
-            $('.nav-link').each(function() {
+            
+            // Highlight active link in sidebar
+            $('.sidebar-menu a').each(function() {
                 var linkPage = $(this).attr('href');
                 if (currentPage === linkPage) {
                     $(this).addClass('active');
-                    $('.nav-link.active').not(this).removeClass('active');
-                }
-            });
-
-            // Mobile menu close on click
-            $('.navbar-nav .nav-link').click(function() {
-                if ($(window).width() < 992) {
-                    $('.navbar-collapse').collapse('hide');
+                    $('.sidebar-menu a.active').not(this).removeClass('active');
                 }
             });
 
@@ -1080,15 +1091,6 @@
                 return true;
             });
 
-            // Tooltip for mobile
-            $(window).resize(function() {
-                if ($(window).width() <= 991) {
-                    $('.registration-tooltip').css('display', 'block');
-                } else {
-                    $('.registration-tooltip').css('display', 'none');
-                }
-            });
-
             // Animate elements on scroll
             function checkScroll() {
                 $('.fade-in').each(function() {
@@ -1106,15 +1108,28 @@
             $(window).on('scroll', checkScroll);
             checkScroll();
 
-            // No need to adjust body padding dynamically since copyright is separate
-            // Just ensure it stays at bottom
-            $(window).on('resize', function() {
-                // Keep copyright at bottom
-                $('.copyright').css({
-                    'bottom': '0',
-                    'left': '0',
-                    'right': '0'
-                });
+            // Keyboard shortcuts for sidebar
+            $(document).keydown(function(e) {
+                // Ctrl + B to toggle sidebar
+                if (e.ctrlKey && e.key === 'b') {
+                    e.preventDefault();
+                    sidebarToggle.click();
+                }
+                
+                // Escape key to close sidebar
+                if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                    sidebarToggle.click();
+                }
+            });
+
+            // Make sidebar toggle accessible
+            sidebarToggle.setAttribute('aria-label', 'Toggle sidebar menu');
+            sidebarToggle.setAttribute('aria-expanded', 'false');
+            
+            // Update aria-expanded attribute
+            sidebarToggle.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
             });
         });
     </script>
