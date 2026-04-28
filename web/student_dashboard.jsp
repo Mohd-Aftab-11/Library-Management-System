@@ -781,7 +781,20 @@
                         </a>
                     </div>
                 </div>
-                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="dashboard-card fade-in">
+                        <div class="card-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="card-title">Change Password</h3>
+                        <p class="card-content">
+                            Update your account password
+                        </p>
+                        <a href="change_password.jsp" class="dashboard-link">
+                            <i class="fas fa-arrow-right mr-2"></i> Change Password
+                        </a>
+                    </div>
+                </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="dashboard-card fade-in">
                         <div class="card-icon">

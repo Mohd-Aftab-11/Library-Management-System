@@ -727,7 +727,7 @@
                         <i class="fas fa-plus"></i>
                     </div>
                     <h4>Add Book</h4>
-                    <p>Add new books to the library collection</p>
+                    <p>Add new books to collection</p>
                     <a href="add_book.jsp" class="pulse">Add Book</a>
                 </div>
                 <div class="dashboard-card">
@@ -736,7 +736,7 @@
                     </div>
                     <h4>Update Book</h4>
                     <p>Modify existing book details</p>
-                    <a href="update_book.jsp">Update Book</a>
+                    <a href="update_book.jsp" class="pulse">Update Book</a>
                 </div>
                 <div class="dashboard-card">
                     <div class="card-icon books">
@@ -744,15 +744,15 @@
                     </div>
                     <h4>Delete Book</h4>
                     <p>Remove books from library</p>
-                    <a href="delete_book.jsp">Delete Book</a>
+                    <a href="delete_book.jsp" class="pulse">Delete Book</a>
                 </div>
                 <div class="dashboard-card">
                     <div class="card-icon books">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h4>Search Books</h4>
+                    <h4>Search Book</h4>
                     <p>Find books in the library</p>
-                    <a href="search_book.jsp">Search Books</a>
+                    <a href="search_book.jsp" class="pulse">Search Book</a>
                 </div>
             </div>
         </div>

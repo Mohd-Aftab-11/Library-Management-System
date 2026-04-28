@@ -41,7 +41,7 @@ public class ForgotPasswordServlet21 extends HttpServlet {
 
     private void sendEmail(String to, String password) {
         final String from = "ma.aftab2003@gmail.com"; // Your Gmail address
-        final String passwordEmail = "fpnb xbwc afjw teow"; // App-specific password for Gmail
+        final String passwordEmail = "qmch fnfw ndrd fxff"; // App-specific password for Gmail
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
