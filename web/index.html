@@ -49,6 +49,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            padding-bottom: 60px;
         }
 
         /* Modern Header */
@@ -722,12 +723,21 @@
             transform: translateY(-3px);
         }
 
+        /* Fixed Footer Bottom */
         .footer-bottom {
-            padding-top: 2rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding-top: 1rem;
+            padding-bottom: 0.2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
+            background: var(--dark-color);
+            z-index: 999;
+            margin-bottom: 0;
         }
 
         /* Responsive Design */
@@ -784,6 +794,16 @@
             
             .info-card {
                 padding: 2rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.75rem;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            body {
+                padding-bottom: 50px;
             }
         }
 
@@ -881,20 +901,10 @@
             <li><a href="about_us.jsp"><i class="fas fa-university"></i>About College</a></li>
             <li><a href="blog.jsp"><i class="fas fa-newspaper"></i>Blog & News</a></li>
             <li><a href="timetable.jsp"><i class="fas fa-calendar-alt"></i>Academic Schedule</a></li>
-            <li><a href="forgot_password.jsp"><i class="fas fa-key"></i>Password Recovery</a></li>
             
             <div class="sidebar-divider"></div>
             
-            <li><a href="#"><i class="fas fa-book-open"></i>Digital Library</a></li>
-            <li><a href="#"><i class="fas fa-file-alt"></i>Research Papers</a></li>
-            <li><a href="#"><i class="fas fa-journal-whills"></i>Academic Journals</a></li>
-            <li><a href="#"><i class="fas fa-bookmark"></i>Magazines</a></li>
-            <li><a href="#"><i class="fas fa-archive"></i>Archives</a></li>
-            
-            <div class="sidebar-divider"></div>
-            
-            <li><a href="registration.jsp"><i class="fas fa-user-plus"></i>Student Registration</a></li>
-            <li><a href="login.jsp"><i class="fas fa-sign-in-alt"></i>Login Portal</a></li>
+            <li><a href="Registration.jsp"><i class="fas fa-user-plus"></i>Student Registration</a></li>
         </ul>
         
         <div class="sidebar-footer">
@@ -1123,12 +1133,13 @@
                         </ul>
                     </div>
                 </div>
-                
-                <div class="footer-bottom">
-                    <p>© <span id="currentYear"></span> Library Management System | Sacred Heart Degree College | All Rights Reserved</p>
-                </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Fixed Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© <span id="currentYear"></span> Library Management System | Sacred Heart Degree College | All Rights Reserved</p>
     </div>
 
     <!-- Bootstrap JS -->

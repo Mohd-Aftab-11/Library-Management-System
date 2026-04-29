@@ -631,7 +631,7 @@
                         <a class="nav-link active" href="Registration.jsp">Registration</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.jsp">Login</a>
+                        <a class="nav-link" href="timetable.jsp">Timetable</a>
                     </li>
                 </ul>
             </div>

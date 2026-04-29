@@ -3,92 +3,789 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Library Timetable</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="Shortcut Icon" type="image/ico" href="favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable - Library Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-primary: linear-gradient(135deg, #2c3e50, #4a6491);
+            --gradient-secondary: linear-gradient(135deg, #3498db, #2ecc71);
+            --gradient-accent: linear-gradient(135deg, #e74c3c, #f39c12);
+            --gradient-success: linear-gradient(135deg, #27ae60, #2ecc71);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-top: 70px;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 50px;
         }
-        .timetable-container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+
+        /* Enhanced Navbar */
+        .navbar {
+            background: var(--gradient-primary);
+            padding: 0.3rem 1.2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 70px;
+            min-height: 70px;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--secondary-color);
         }
-        .timetable-heading {
-            text-align: center;
-            color: #452066;
-            margin-bottom: 20px;
+
+        .navbar.scrolled {
+            padding: 0.3rem 1rem;
         }
-        .table thead th {
-            background-color: #452066;
+
+        .navbar-brand {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 1.5rem !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-icon {
+            background: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--secondary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .brand-text {
             color: white;
+            font-size: 1.4rem;
+            letter-spacing: 0.3px;
+        }
+
+        .brand-subtext {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.8);
+            display: block;
+            font-weight: 400;
+        }
+
+        .navbar-toggler {
+            border: 2px solid white;
+            padding: 0.4rem;
+            transition: var(--transition);
+            order: 3;
+            margin-left: auto;
+        }
+
+        .navbar-toggler:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            padding: 0.4rem 1rem !important;
+            margin: 0 0.3rem;
+            border-radius: 20px;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.9rem;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--secondary-color);
+            color: white !important;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: var(--secondary-color);
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+            animation: ani 8s infinite linear;
+            opacity: 0.9;
+        }
+
+        @keyframes ani {
+            0% { background-image: url('pexels-cottonbro-4861352.jpg'); }
+            50% { background-image: url('pexels-kseniachernaya-3952078.jpg'); }
+            100% { background-image: url('https://cache.careers360.mobi/media/presets/720X480/colleges/social-media/media-gallery/13757/2018/11/29/Campus%20view%20of%20Sacred%20Heart%20Degree%20College%20Sitapur_Campus-View.jpg'); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 152, 219, 0.8) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            padding: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Timetable Container */
+        .timetable-container {
+            max-width: 1000px;
+            margin: 0 auto 3rem auto;
+            animation: fadeInUp 0.8s ease-out;
+            padding: 0 20px;
+        }
+
+        .timetable-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-hover);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .timetable-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-header-custom {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .card-header-custom h2 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .card-header-custom .header-icon {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .card-body-custom {
+            padding: 2rem;
+        }
+
+        /* Table Styling */
+        .library-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .library-table thead th {
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            font-size: 0.95rem;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .library-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .library-table tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+            transform: scale(1.01);
+        }
+
+        .library-table tbody td {
+            padding: 1rem;
+            color: #555;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: middle;
+        }
+
+        .library-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge-day {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .badge-closed {
+            background: #e74c3c;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-course {
+            background: var(--gradient-success);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .time-icon {
+            color: var(--secondary-color);
+            margin-right: 5px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d6eaf8 100%);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .info-box i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a2530 0%, #2c3e50 100%);
+            color: white;
+            padding: 3rem 0 2rem 0;
+            position: relative;
+            z-index: 10;
+            margin-top: 4rem;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-secondary);
+            z-index: 1;
+        }
+
+        .footer h4 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-secondary);
+            border-radius: 2px;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.6rem;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .footer a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer .contact-info {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer .contact-info i {
+            width: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .footer .social-links a {
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            margin-bottom: 0;
+        }
+
+        .footer .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Fixed Copyright Section */
+        .copyright {
+            background: var(--gradient-primary);
+            padding: 0.8rem !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .copyright p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                padding: 0.3rem 1rem;
+                min-height: 60px;
+                height: 60px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .card-body-custom {
+                padding: 1rem;
+                overflow-x: auto;
+            }
+            
+            .library-table {
+                font-size: 0.85rem;
+                min-width: 600px;
+            }
+            
+            .library-table thead th,
+            .library-table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-header-custom h2 {
+                font-size: 1.5rem;
+            }
+            
+            .timetable-container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
         }
     </style>
 </head>
+
 <body>
+    <!-- Enhanced Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="index.html">
+                <div class="brand-icon">
+                    <i class="fas fa-book-open fa-lg"></i>
+                </div>
+                <div>
+                    <span class="brand-text">Library Hub</span>
+                    <span class="brand-subtext">Sacred Heart Degree College</span>
+                </div>
+            </a>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<div class="container timetable-container">
-    <h2 class="timetable-heading">Library Timetable</h2>
-    <p class="text-center">Here are the library opening hours and book-issuing days for each course.</p>
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>Day</th>
-            <th>Opening Time</th>
-            <th>Closing Time</th>
-            <th>Book Issuing (Course)</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Monday</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-            <td>BCA</td>
-        </tr>
-        <tr>
-            <td>Tuesday</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-            <td>BCom</td>
-        </tr>
-        <tr>
-            <td>Wednesday</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-            <td>BSc</td>
-        </tr>
-        <tr>
-            <td>Thursday</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-            <td>BCA</td>
-        </tr>
-        <tr>
-            <td>Friday</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-            <td>BCom</td>
-        </tr>
-        <tr>
-            <td>Saturday</td>
-            <td>10:00 AM</td>
-            <td>4:00 PM</td>
-            <td>BSc</td>
-        </tr>
-        <tr>
-            <td>Sunday</td>
-            <td>Closed</td>
-            <td>Closed</td>
-            <td>Closed</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+            <!-- Navigation Menu -->
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about_us.jsp">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.jsp">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Registration.jsp">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="timetable.jsp">Timetable</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero-section fade-in">
+        <div class="img"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Library Timetable</h1>
+                <p class="hero-subtitle">Check library operating hours and book issuing schedule for different courses.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timetable Content -->
+    <div class="timetable-container">
+        <div class="timetable-card fade-in">
+            <div class="card-header-custom">
+                <h2>
+                    <i class="fas fa-calendar-alt header-icon"></i>
+                    Weekly Schedule
+                </h2>
+            </div>
+            <div class="card-body-custom">
+                <table class="library-table table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-calendar-day"></i> Day</th>
+                            <th><i class="fas fa-clock"></i> Opening Time</th>
+                            <th><i class="fas fa-clock"></i> Closing Time</th>
+                            <th><i class="fas fa-book"></i> Book Issuing (Course)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge-day"><i class="fas fa-sun"></i> Monday</span></td>
+                            <td><i class="fas fa-hourglass-start time-icon"></i> 9:00 AM</td>
+                            <td><i class="fas fa-hourglass-end time-icon"></i> 6:00 PM</td>
+                            <td><span class="badge-course">BCA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-day"><i class="fas fa-sun"></i> Tuesday</span></td>
+                            <td><i class="fas fa-hourglass-start time-icon"></i> 9:00 AM</td>
+                            <td><i class="fas fa-hourglass-end time-icon"></i> 6:00 PM</td>
+                            <td><span class="badge-course">BCom</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-day"><i class="fas fa-sun"></i> Wednesday</span></td>
+                            <td><i class="fas fa-hourglass-start time-icon"></i> 9:00 AM</td>
+                            <td><i class="fas fa-hourglass-end time-icon"></i> 6:00 PM</td>
+                            <td><span class="badge-course">BSc</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-day"><i class="fas fa-sun"></i> Thursday</span></td>
+                            <td><i class="fas fa-hourglass-start time-icon"></i> 9:00 AM</td>
+                            <td><i class="fas fa-hourglass-end time-icon"></i> 6:00 PM</td>
+                            <td><span class="badge-course">BCA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-day"><i class="fas fa-sun"></i> Friday</span></td>
+                            <td><i class="fas fa-hourglass-start time-icon"></i> 9:00 AM</td>
+                            <td><i class="fas fa-hourglass-end time-icon"></i> 6:00 PM</td>
+                            <td><span class="badge-course">BCom</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-day"><i class="fas fa-sun"></i> Saturday</span></td>
+                            <td><i class="fas fa-hourglass-start time-icon"></i> 10:00 AM</td>
+                            <td><i class="fas fa-hourglass-end time-icon"></i> 4:00 PM</td>
+                            <td><span class="badge-course">BSc</span></td>
+                        </tr>
+                        <tr style="background-color: #fff3f3;">
+                            <td><span class="badge-closed"><i class="fas fa-moon"></i> Sunday</span></td>
+                            <td colspan="2" style="text-align: center;"><i class="fas fa-times-circle"></i> Closed</td>
+                            <td><span class="badge-closed">Closed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> <strong>Note:</strong> Books can only be issued on the designated days for each course. Students must have a valid library card.</p>
+                </div>
+                
+                <div class="info-box" style="margin-top: 1rem; background: linear-gradient(135deg, #fff9e6 0%, #fff3cf 100%); border-left-color: #f39c12;">
+                    <p><i class="fas fa-clock"></i> <strong>Lunch Break:</strong> Library remains closed from 1:00 PM to 1:30 PM on all working days.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Quick Links</h4>
+                    <a href="index.html"><i class="fas fa-chevron-right mr-2"></i>Home</a>
+                    <a href="about_us.jsp"><i class="fas fa-chevron-right mr-2"></i>About Us</a>
+                    <a href="blog.jsp"><i class="fas fa-chevron-right mr-2"></i>Blog</a>
+                    <a href="Registration.jsp"><i class="fas fa-chevron-right mr-2"></i>Registration</a>
+                    <a href="login.jsp"><i class="fas fa-chevron-right mr-2"></i>Login</a>
+                    <a href="forgot_password.jsp"><i class="fas fa-chevron-right mr-2"></i>Forgot Password</a>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Resources</h4>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>E-Books</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Research Papers</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Journals</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Magazines</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Digital Archives</a>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Sacred Heart Degree College<br>Sitapur, Uttar Pradesh</p>
+                        <p><i class="fas fa-phone mr-2"></i> +91 9876543210</p>
+                        <p><i class="fas fa-envelope mr-2"></i> library@shdc.edu.in</p>
+                        <p><i class="fas fa-clock mr-2"></i> Mon-Sat: 8:45 AM - 2:30 PM</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>College Info</h4>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Academic Calendar</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Examination Schedule</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Faculty Directory</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Campus Facilities</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Alumni Network</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Copyright Section -->
+    <div class="copyright text-center">
+        <p>© <span id="currentYear"></span> Library Hub - Sacred Heart Degree College. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 30) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+
+        // Mobile menu close on click
+        $('.navbar-nav .nav-link').click(function() {
+            if ($(window).width() < 992) {
+                $('.navbar-collapse').collapse('hide');
+            }
+        });
+
+        // Animate elements on scroll
+        function checkScroll() {
+            $('.fade-in').each(function() {
+                var elementTop = $(this).offset().top;
+                var elementBottom = elementTop + $(this).outerHeight();
+                var viewportTop = $(window).scrollTop();
+                var viewportBottom = viewportTop + $(window).height();
+                
+                if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                    $(this).addClass('animated');
+                }
+            });
+        }
+
+        $(window).on('scroll', checkScroll);
+        checkScroll();
+
+        // Smooth scroll for anchor links
+        $('a[href^="#"]').on('click', function(e) {
+            if (this.hash !== "") {
+                e.preventDefault();
+                const hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 80
+                }, 800);
+            }
+        });
+    </script>
 </body>
 </html>
