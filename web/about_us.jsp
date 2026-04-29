@@ -771,7 +771,7 @@
                     <h2><i class="fas fa-code"></i> Our Developer</h2>
                     <div class="developer-profile">
                         <div class="developer-avatar">
-                            ML
+                            MA
                         </div>
                         <div class="developer-info">
                             <h3>Mohd Aftab</h3>
