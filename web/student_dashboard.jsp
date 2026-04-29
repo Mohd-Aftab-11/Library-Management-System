@@ -1,53 +1,52 @@
-<%-- 
-    Document   : student_dashboard
-    Created on : 27 Aug, 2024, 8:31:00 PM
-    Author     : MOHD LARAIB
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 
 <%
-  String role = (String) session.getAttribute("role");
-    if (role == null || !"Student".equals(role)) {
+    String role = (session != null) ? (String) session.getAttribute("role") : null;
+
+    if (session == null || role == null || !role.equals("Student")) {
         response.sendRedirect("index.jsp");
         return;
     }
 %>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="Shortcut Icon" type="image/ico" href="favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibraryPro - Student Dashboard</title>
-    
+    <title>Student Dashboard - Library Management System</title>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #7c3aed;
-            --accent-color: #ef4444;
-            --success-color: #10b981;
-            --light-color: #f8fafc;
-            --dark-color: #1e293b;
-            --gray-color: #64748b;
-            --light-gray: #e2e8f0;
-            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-            --gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.12);
-            --transition: all 0.3s ease;
-            --border-radius: 16px;
-            --card-radius: 12px;
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --gradient-primary: linear-gradient(135deg, #2c3e50, #4a6491);
+            --gradient-secondary: linear-gradient(135deg, #3498db, #2ecc71);
+            --gradient-accent: linear-gradient(135deg, #e74c3c, #f39c12);
+            --gradient-warning: linear-gradient(135deg, #f39c12, #e67e22);
+            --gradient-success: linear-gradient(135deg, #27ae60, #2ecc71);
+            --gradient-info: linear-gradient(135deg, #17a2b8, #20c997);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
@@ -57,353 +56,226 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--light-color);
-            color: var(--dark-color);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            position: relative;
+            padding-bottom: 50px;
         }
 
-        /* Modern Header */
-        .modern-header {
-            background: white;
-            padding: 1rem 0;
+        /* Enhanced Navbar */
+        .navbar {
+            background: var(--gradient-primary);
+            padding: 0.5rem 1.5rem;
             box-shadow: var(--shadow);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+            min-height: 70px;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--secondary-color);
         }
 
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .navbar.scrolled {
+            padding: 0.3rem 1rem;
         }
 
-        .logo-container {
+        .navbar-brand {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 1.5rem !important;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            text-decoration: none;
+        }
+
+        .brand-icon {
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--secondary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: var(--transition);
         }
 
-        .logo-icon {
-            background: var(--gradient-primary);
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .brand-text {
             color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+            font-size: 1.4rem;
+            letter-spacing: 0.3px;
         }
 
-        .logo-text {
-            display: flex;
-            flex-direction: column;
+        .brand-subtext {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.8);
+            display: block;
+            font-weight: 400;
         }
 
-        .logo-title {
-            font-family: 'Source Serif Pro', serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--dark-color);
-            line-height: 1.2;
+        .navbar-toggler {
+            border: 2px solid white;
+            padding: 0.4rem;
+            transition: var(--transition);
         }
 
-        .logo-subtitle {
-            font-size: 0.75rem;
-            color: var(--gray-color);
+        .navbar-toggler:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-link {
+            color: white !important;
             font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            padding: 0.5rem 1.2rem !important;
+            margin: 0 0.3rem;
+            border-radius: 25px;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--success-color);
+            color: black !important;
+            text-decoration: none;
+            transform: translateY(-2px);
         }
 
-        /* User Profile */
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .nav-link.active {
+            background: var(--secondary-color);
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
         }
 
-        .user-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        /* Dashboard Container */
+        .dashboard-container {
+            padding: 2rem 1rem;
+            margin-top: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Welcome Header */
+        .welcome-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--success-color);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .welcome-header h2 {
+            color: var(--primary-color);
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
         .user-info {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .user-name {
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--dark-color);
-            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
         }
 
-        .user-role {
-            font-size: 0.8rem;
-            color: var(--gray-color);
-        }
-
-        /* Modern Menu Toggle */
-        .menu-toggle {
-            background: white;
+        .user-details h3 {
+            margin: 0;
             color: var(--primary-color);
-            border: 2px solid var(--light-gray);
-            width: 48px;
-            height: 48px;
+            font-weight: 600;
+        }
+
+        .user-details .badge {
+            background: var(--gradient-info);
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* Dashboard Sections */
+        .dashboard-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 1.25rem;
-        }
-
-        .menu-toggle:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Modern Sidebar */
-        .modern-sidebar {
-            position: fixed;
-            top: 0;
-            left: -320px;
-            width: 320px;
-            height: 100vh;
-            background: white;
-            z-index: 1100;
-            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-            box-shadow: var(--shadow-heavy);
-            border-right: 1px solid var(--light-gray);
-        }
-
-        .modern-sidebar.open {
-            left: 0;
-        }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(30, 41, 59, 0.8);
-            z-index: 1050;
-            backdrop-filter: blur(8px);
-        }
-
-        .sidebar-overlay.show {
-            display: block;
-        }
-
-        .sidebar-header {
-            padding: 2.5rem 2rem 2rem;
-            border-bottom: 1px solid var(--light-gray);
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .sidebar-profile {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 3px solid white;
-            background: var(--gradient-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar-user-info h3 {
-            font-family: 'Source Serif Pro', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .sidebar-user-info p {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-
-        .sidebar-status {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 2rem;
-            margin: 0;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            padding: 1rem 1.25rem;
-            color: var(--dark-color);
-            text-decoration: none;
-            transition: var(--transition);
-            border-radius: 10px;
-            font-weight: 500;
-        }
-
-        .sidebar-menu a:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-            transform: translateX(5px);
-        }
-
-        .sidebar-menu a.active {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
-        }
-
-        .sidebar-menu a i {
-            width: 24px;
-            font-size: 1.1rem;
             margin-right: 1rem;
-            color: inherit;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(44, 62, 80, 0.2);
         }
 
-        .sidebar-divider {
-            height: 1px;
-            background: var(--light-gray);
-            margin: 1.5rem 0;
+        .section-header h3 {
+            color: var(--primary-color);
+            font-family: 'Roboto Slab', serif;
+            font-weight: 600;
+            margin: 0;
+            font-size: 1.4rem;
         }
 
-        .sidebar-footer {
-            padding: 2rem;
-            text-align: center;
-            color: var(--gray-color);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--light-gray);
-        }
-
-        /* Main Content */
-        .main-content {
-            padding-top: 100px;
-            padding-bottom: 2rem;
-        }
-
-        /* Welcome Card */
-        .welcome-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 3rem;
-            margin-bottom: 2.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--light-gray);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: var(--gradient-primary);
-        }
-
-        .welcome-title {
-            font-family: 'Source Serif Pro';
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-color);
+        /* Dashboard Cards Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 1rem;
-        }
-
-        .welcome-title span {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-text {
-            color: var(--gray-color);
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            max-width: 800px;
-        }
-
-        /* Dashboard Cards */
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
         }
 
         .dashboard-card {
             background: white;
-            border-radius: var(--card-radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--light-gray);
-            height: 100%;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
             transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            text-align: center;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-heavy);
         }
 
         .dashboard-card::before {
@@ -411,121 +283,265 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gradient-secondary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary-color);
+        }
+
+        .dashboard-card:hover::before {
+            opacity: 1;
         }
 
         .card-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
             color: white;
-            font-size: 2rem;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
-        }
-
-        .card-title {
-            font-family: 'Source Serif Pro', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 1.25rem;
-        }
-
-        .card-content {
-            color: var(--gray-color);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .dashboard-link {
-            display: inline-block;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
             transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
         }
 
-        .dashboard-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        .dashboard-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-icon.books { background: var(--gradient-primary); }
+        .card-icon.attendance { background: var(--gradient-warning); }
+        .card-icon.feedback { background: var(--gradient-info); }
+        .card-icon.fines { background: var(--gradient-accent); }
+        .card-icon.profile { background: var(--gradient-success); }
+        .card-icon.search { background: var(--gradient-secondary); }
+
+        .dashboard-card h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .dashboard-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .dashboard-card a {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: var(--gradient-secondary);
             color: white;
             text-decoration: none;
-        }
-
-        /* User Badges */
-        .user-badges {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .user-badge {
-            background: var(--light-color);
-            color: var(--dark-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+            border-radius: 25px;
             font-weight: 500;
             font-size: 0.9rem;
-            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            min-width: 140px;
+        }
+
+        .dashboard-card a:hover {
+            background: white;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
             transition: var(--transition);
         }
 
-        .user-badge:hover {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .user-badge i {
-            font-size: 1rem;
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
         }
 
-        /* Footer */
-        .modern-footer {
-            background: var(--dark-color);
+        .stat-icon.books { background: var(--gradient-primary); }
+        .stat-icon.issued { background: var(--gradient-warning); }
+        .stat-icon.fines { background: var(--gradient-accent); }
+        .stat-icon.attendance { background: var(--gradient-success); }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .stat-info p {
+            color: #666;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Footer - Same as home page */
+        .footer {
+            background: linear-gradient(135deg, #1a2530 0%, #2c3e50 100%);
             color: white;
-            padding: 3rem 0 2rem;
+            padding: 3rem 0 2rem 0;
+            position: relative;
+            z-index: 10;
             margin-top: 4rem;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-secondary);
+            z-index: 1;
         }
 
-        .footer-text {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+        .footer h4 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
         }
 
-        .copyright {
-            color: rgba(255, 255, 255, 0.5);
+        .footer h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-secondary);
+            border-radius: 2px;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.6rem;
+            transition: var(--transition);
             font-size: 0.85rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer .contact-info {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer .contact-info i {
+            width: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .footer .social-links a {
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            margin-bottom: 0;
+        }
+
+        .footer .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .footer .quick-links a {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .footer .quick-links a:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Fixed Copyright Section */
+        .copyright {
+            background: var(--gradient-primary);
+            padding: 0.8rem !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .copyright p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         /* Animations */
@@ -540,74 +556,71 @@
             }
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
 
         /* Responsive Design */
-        @media (max-width: 992px) {
-            .modern-sidebar {
-                width: 280px;
-                left: -280px;
-            }
-            
-            .welcome-title {
-                font-size: 2rem;
-            }
-        }
-
         @media (max-width: 768px) {
-            .header-container {
-                padding: 0 1rem;
-            }
-            
-            .logo-title {
-                font-size: 1.5rem;
-            }
-            
-            .user-info {
-                display: none;
-            }
-            
-            .welcome-card {
-                padding: 2rem;
-            }
-            
             .dashboard-container {
-                padding: 0 1rem;
+                padding: 1rem;
+                margin-top: 70px;
             }
-            
-            .dashboard-card {
-                padding: 2rem;
+
+            .welcome-header {
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-icon {
+                margin-right: 0;
+                margin-bottom: 0.8rem;
+            }
+
+            .footer .row > div {
+                margin-bottom: 2rem;
             }
         }
 
-        @media (max-width: 576px) {
-            .menu-toggle {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+        @media (min-width: 769px) and (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
-            .logo-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.25rem;
-            }
-            
-            .welcome-title {
-                font-size: 1.8rem;
-            }
-            
-            .user-badges {
-                flex-direction: column;
-                align-items: flex-start;
+        }
+
+        @media (min-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
@@ -615,219 +628,220 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
+            background: var(--secondary-color);
+            border-radius: 6px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
+            background: var(--primary-color);
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
         }
     </style>
 </head>
+
 <body>
-    <!-- Modern Header -->
-    <header class="modern-header">
-        <div class="header-container">
-            <div class="logo-container">
-                <div class="logo-icon">
-                    <i class="fas fa-book"></i>
+    <!-- Enhanced Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="student_dashboard.jsp">
+                <div class="brand-icon">
+                    <i class="fas fa-book-open fa-lg"></i>
                 </div>
-                <div class="logo-text">
-                    <div class="logo-title">Library Hub</div>
-                    <div class="logo-subtitle">Student Dashboard</div>
+                <div>
+                    <span class="brand-text">Library Hub</span>
+                    <span class="brand-subtext">Student Dashboard</span>
                 </div>
-            </div>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+            </a>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
             </button>
-        </div>
-    </header>
 
-    <!-- Modern Sidebar -->
-    <div class="modern-sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-profile">
-                <div class="sidebar-avatar">
-                    <%= session.getAttribute("username") != null ? 
-                        ((String)session.getAttribute("username")).charAt(0) : "U" %>
+            <!-- Navigation Menu -->
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="student_dashboard.jsp">
+                            <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Logout">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Welcome Header -->
+        <div class="welcome-header">
+            <h2>Welcome, <span class="text-gradient"><%= session.getAttribute("username") %></span></h2>
+            <p class="text-muted">Role: Student | Last Login: Today</p>
+            <div class="user-info">
+                <div class="user-avatar floating">
+                    <%= ((String) session.getAttribute("username")).charAt(0) %>
                 </div>
-                <div class="sidebar-user-info">
+                <div class="user-details">
                     <h3><%= session.getAttribute("username") %></h3>
-                    <p>Student Account</p>
-                    <span class="sidebar-status">
-                        <i class="fas fa-circle" style="color: #10b981; font-size: 0.6rem; margin-right: 4px;"></i>
-                        Active
-                    </span>
+                    <span class="badge">Student</span>
                 </div>
             </div>
         </div>
-        
-        <ul class="sidebar-menu">
-            <li><a href="#" class="active"><i class="fas fa-home"></i>Dashboard Home</a></li>
-            <li><a href="attendance.jsp"><i class="fas fa-calendar-check"></i>Mark Attendance</a></li>
-            <li><a href="search_book.jsp"><i class="fas fa-search"></i>Search Books</a></li>
-            <li><a href="feedback.jsp"><i class="fas fa-comment-dots"></i>Give Feedback</a></li>
-            <li><a href="viewallfines.jsp"><i class="fas fa-money-check-alt"></i>View Fines</a></li>
-            
-            <div class="sidebar-divider"></div>
-            
-            <li><a href="borrowed_books.jsp"><i class="fas fa-book-reader"></i>Borrowed Books</a></li>
-            <li><a href="profile.jsp"><i class="fas fa-user-cog"></i>My Profile</a></li>
-            <li><a href="#"><i class="fas fa-history"></i>Borrowing History</a></li>
-            <li><a href="#"><i class="fas fa-bell"></i>Notifications</a></li>
-            
-            <div class="sidebar-divider"></div>
-            
-            <li><a href="Logout" style="color: var(--accent-color);">
-                <i class="fas fa-sign-out-alt"></i>Logout
-            </a></li>
-        </ul>
-        
-        <div class="sidebar-footer">
-            <p>© <span id="sidebarYear"></span> Library Management System</p>
-            <p>Sacred Heart Degree College</p>
+
+        <!-- Library Services Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Library Services</h3>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-icon books">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>Search Books</h4>
+                    <p>Browse our extensive collection of books, journals, and digital resources.</p>
+                    <a href="search_book.jsp" class="pulse">Search Books</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon feedback">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h4>Give Feedback</h4>
+                    <p>Share your suggestions and feedback to help us improve.</p>
+                    <a href="feedback.jsp">Give Feedback</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon fines">
+                        <i class="fas fa-money-check-alt"></i>
+                    </div>
+                    <h4>View Fines</h4>
+                    <p>Check and manage pending fines for late returns.</p>
+                    <a href="viewallfines.jsp">View Fines</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance & Profile Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h3>Account & Attendance</h3>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-icon attendance">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4>Mark Attendance</h4>
+                    <p>Record your daily library visit attendance.</p>
+                    <a href="attendance.jsp">Mark Attendance</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon profile">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h4>My Profile</h4>
+                    <p>Update your personal information.</p>
+                    <a href="profile.jsp">Manage Profile</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon profile">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>Change Password</h4>
+                    <p>Update your account password for security.</p>
+                    <a href="change_password.jsp">Change Password</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="dashboard-container">
-            <!-- Welcome Section -->
-            <div class="welcome-card fade-in">
-                <h1 class="welcome-title"><%= session.getAttribute("username") %>!</h1>
-                <p class="welcome-text">
-                    Welcome to your student dashboard. Here you can manage your library activities, 
-                    search for books, mark attendance, view fines, and access all the resources 
-                    available to you as a student of Sacred Heart Degree College.
-                </p>
-            </div>
-
-            <!-- Dashboard Cards Grid -->
+    <!-- Main Footer -->
+    <footer class="footer">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <h3 class="card-title">Mark Attendance</h3>
-                        <p class="card-content">
-                            Record your library visit attendance. Regular attendance helps track your study patterns.
-                        </p>
-                        <a href="attendance.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> Mark Attendance
-                        </a>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Quick Links</h4>
+                    <a href="student_dashboard.jsp"><i class="fas fa-chevron-right mr-2"></i>Dashboard</a>
+                    <a href="search_book.jsp"><i class="fas fa-chevron-right mr-2"></i>Search Books</a>
+                    <a href="borrowed_books.jsp"><i class="fas fa-chevron-right mr-2"></i>My Books</a>
+                    <a href="attendance.jsp"><i class="fas fa-chevron-right mr-2"></i>Mark Attendance</a>
+                    <a href="profile.jsp"><i class="fas fa-chevron-right mr-2"></i>My Profile</a>
+                    <div class="quick-links">
+                        <a href="#">FAQ</a>
+                        <a href="#">Help Desk</a>
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3 class="card-title">Search Books</h3>
-                        <p class="card-content">
-                            Browse our extensive collection of books, journals, and digital resources.
-                        </p>
-                        <a href="search_book.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> Search Books
-                        </a>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Library Resources</h4>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>E-Books</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Research Papers</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Journals</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Magazines</a>
+                    <a href="#"><i class="fas fa-chevron-right mr-2"></i>Digital Archives</a>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Sacred Heart Degree College<br>Sitapur, Uttar Pradesh</p>
+                        <p><i class="fas fa-phone mr-2"></i> +91 9876543210</p>
+                        <p><i class="fas fa-envelope mr-2"></i> library@shdc.edu.in</p>
+                        <p><i class="fas fa-clock mr-2"></i> Mon-Sat: 8:45 AM - 2:30 PM</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-comment-dots"></i>
-                        </div>
-                        <h3 class="card-title">Give Feedback</h3>
-                        <p class="card-content">
-                            Share your suggestions and feedback to help us improve library services.
-                        </p>
-                        <a href="feedback.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> Give Feedback
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-money-check-alt"></i>
-                        </div>
-                        <h3 class="card-title">View Fines</h3>
-                        <p class="card-content">
-                            Manage all pending fines for late returns or other charges.
-                        </p>
-                        <a href="viewallfines.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> View Fines
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <h3 class="card-title">Borrowed Books</h3>
-                        <p class="card-content">
-                            View currently borrowed books and their due dates.
-                        </p>
-                        <a href="borrowed_books.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> View Borrowed Books
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <h3 class="card-title">Change Password</h3>
-                        <p class="card-content">
-                            Update your account password
-                        </p>
-                        <a href="change_password.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> Change Password
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="dashboard-card fade-in">
-                        <div class="card-icon">
-                            <i class="fas fa-user-cog"></i>
-                        </div>
-                        <h3 class="card-title">My Profile</h3>
-                        <p class="card-content">
-                            Update your personal information and account settings.
-                        </p>
-                        <a href="profile.jsp" class="dashboard-link">
-                            <i class="fas fa-arrow-right mr-2"></i> Manage Profile
-                        </a>
-                    </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4>Student Tools</h4>
+                    <a href="viewallfines.jsp"><i class="fas fa-chevron-right mr-2"></i>View Fines</a>
+                    <a href="feedback.jsp"><i class="fas fa-chevron-right mr-2"></i>Give Feedback</a>
+                    <a href="change_password.jsp"><i class="fas fa-chevron-right mr-2"></i>Change Password</a>
+                    <a href="search_book.jsp"><i class="fas fa-chevron-right mr-2"></i>Search Books</a>
+                    <a href="Logout"><i class="fas fa-chevron-right mr-2"></i>Logout</a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modern Footer -->
-    <footer class="modern-footer">
-        <div class="footer-content">
-            <p class="footer-text">
-                Library Management System • Sacred Heart Degree College • Sitapur, Uttar Pradesh
-            </p>
-            <p class="footer-text">
-                Need help? Contact: <a href="mailto:library@shdc.edu.in" style="color: var(--primary-color);">library@shdc.edu.in</a> • 
-                Phone: +91 (05862) 221234
-            </p>
-            <p class="copyright">
-                © <span id="currentYear"></span> Library Management System. All rights reserved.
-            </p>
         </div>
     </footer>
+
+    <!-- Fixed Copyright Section -->
+    <div class="copyright text-center">
+        <p>© <span id="currentYear"></span> Library Hub - Sacred Heart Degree College. All rights reserved.</p>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -835,132 +849,93 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Set current year
+        // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-        document.getElementById('sidebarYear').textContent = new Date().getFullYear();
 
-        // Sidebar functionality
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-        // Toggle sidebar
-        menuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('open');
-            sidebarOverlay.classList.toggle('show');
-            
-            // Change icon
-            const icon = this.querySelector('i');
-            if (sidebar.classList.contains('open')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                this.style.transform = 'rotate(180deg)';
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 30) {
+                $('.navbar').addClass('scrolled');
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                this.style.transform = 'rotate(0deg)';
+                $('.navbar').removeClass('scrolled');
             }
         });
 
-        // Close sidebar when clicking overlay
-        sidebarOverlay.addEventListener('click', function() {
-            sidebar.classList.remove('open');
-            this.classList.remove('show');
-            
-            // Reset button
-            const icon = menuToggle.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            menuToggle.style.transform = 'rotate(0deg)';
-        });
-
-        // Close sidebar when clicking a link on mobile
-        if (window.innerWidth < 992) {
-            const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (!this.classList.contains('logout-btn')) {
-                        sidebar.classList.remove('open');
-                        sidebarOverlay.classList.remove('show');
-                        
-                        // Reset button
-                        const icon = menuToggle.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                        menuToggle.style.transform = 'rotate(0deg)';
-                    }
-                });
+        // Animate cards on scroll
+        function checkScroll() {
+            $('.dashboard-card').each(function() {
+                var elementTop = $(this).offset().top;
+                var elementBottom = elementTop + $(this).outerHeight();
+                var viewportTop = $(window).scrollTop();
+                var viewportBottom = viewportTop + $(window).height();
+                
+                if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                    $(this).addClass('animated');
+                }
             });
         }
 
-        // Active link highlighting
+        $(window).on('scroll', checkScroll);
+        checkScroll();
+
+        // Mobile menu close on click
         $(document).ready(function() {
-            var currentPage = window.location.pathname.split('/').pop();
-            
-            // Highlight active link in sidebar
-            $('.sidebar-menu a').each(function() {
-                var linkPage = $(this).attr('href');
-                if (currentPage === linkPage || 
-                   (currentPage === '' && linkPage === '#')) {
-                    $(this).addClass('active');
-                    $('.sidebar-menu a.active').not(this).removeClass('active');
+            $('.navbar-nav .nav-link').click(function() {
+                if ($(window).width() < 992) {
+                    $('.navbar-collapse').collapse('hide');
                 }
             });
 
-            // Animate elements on scroll
-            function checkScroll() {
-                $('.fade-in').each(function() {
-                    var elementTop = $(this).offset().top;
-                    var elementBottom = elementTop + $(this).outerHeight();
-                    var viewportTop = $(window).scrollTop();
-                    var viewportBottom = viewportTop + $(window).height();
-                    
-                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
-                        $(this).addClass('animated');
+            // Simulate loading stats from backend
+            function loadStats() {
+                // These would typically be AJAX calls to fetch real data
+                // For demo, setting random values that would be replaced by actual data
+                $.ajax({
+                    url: 'getStudentStats.jsp', // You'll need to create this endpoint
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#totalBooks').text(data.borrowedBooks || 0);
+                        $('#pendingReturns').text(data.pendingReturns || 0);
+                        $('#totalFines').text('₹' + (data.totalFines || 0));
+                        $('#attendanceCount').text(data.attendanceDays || 0);
+                    },
+                    error: function() {
+                        // Fallback to random values for demo
+                        $('#totalBooks').text(Math.floor(Math.random() * 5));
+                        $('#pendingReturns').text(Math.floor(Math.random() * 3));
+                        $('#totalFines').text('₹' + Math.floor(Math.random() * 500));
+                        $('#attendanceCount').text(Math.floor(Math.random() * 30 + 10));
                     }
                 });
             }
 
-            $(window).on('scroll', checkScroll);
-            checkScroll();
+            loadStats();
 
-            // Keyboard shortcuts
-            $(document).keydown(function(e) {
-                // Escape to close sidebar
-                if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-                    menuToggle.click();
+            // Add hover effect to stat cards
+            $('.stat-card').hover(
+                function() {
+                    $(this).addClass('animated pulse');
+                },
+                function() {
+                    $(this).removeClass('animated pulse');
                 }
-            });
+            );
 
-            // Accessibility
-            menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            
-            menuToggle.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !isExpanded);
+            // Add loading animation to buttons
+            $('.dashboard-card a').click(function(e) {
+                var btn = $(this);
+                var originalText = btn.html();
+                btn.html('<i class="fas fa-spinner fa-spin"></i> Loading...');
+                btn.prop('disabled', true);
+                
+                // Simulate loading (remove this in production)
+                setTimeout(function() {
+                    btn.html(originalText);
+                    btn.prop('disabled', false);
+                }, 1500);
             });
         });
-
-        // Update greeting based on time
-        function updateGreeting() {
-            const hour = new Date().getHours();
-            const welcomeTitle = document.querySelector('.welcome-title');
-            let greeting = '';
-            
-            if (hour < 12) {
-                greeting = 'Good morning';
-            } else if (hour < 18) {
-                greeting = 'Good afternoon';
-            } else {
-                greeting = 'Good evening';
-            }
-            
-            welcomeTitle.innerHTML = `${greeting}, <span><%= session.getAttribute("username") %></span>!`;
-        }
-
-        // Call on page load
-        updateGreeting();
     </script>
 </body>
 </html>
