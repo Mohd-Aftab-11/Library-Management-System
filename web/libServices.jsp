@@ -696,21 +696,6 @@
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
-        <!-- Welcome Header -->
-        <div class="welcome-header">
-            <h2>Welcome, <span class="text-gradient"><%= session.getAttribute("username") %></span></h2>
-            <p class="text-muted">Role: Student | Last Login: Today</p>
-            <div class="user-info">
-                <div class="user-avatar floating">
-                    <%= ((String) session.getAttribute("username")).charAt(0) %>
-                </div>
-                <div class="user-details">
-                    <h3><%= session.getAttribute("username") %></h3>
-                    <span class="badge">Student</span>
-                </div>
-            </div>
-        </div>
-
         <!-- Library Services Section -->
         <div class="dashboard-section">
             <div class="section-header">

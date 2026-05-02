@@ -690,58 +690,65 @@
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
-        <!-- Welcome Header -->
-        <div class="welcome-header">
-            <h2>Welcome, <span class="text-gradient"><%= session.getAttribute("username") %></span></h2>
-            <p class="text-muted">Role: Librarian | Last Login: Today</p>
-            <div class="user-info">
-                <div class="user-avatar floating">
-                    <%= ((String) session.getAttribute("username")).charAt(0) %>
-                </div>
-                <div class="user-details">
-                    <h3><%= session.getAttribute("username") %></h3>
-                    <span class="badge">Librarian</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Manage Books Section -->
+        <!-- Student Management Section -->
         <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Student Management</h3>
+            </div>
             <div class="dashboard-grid">
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-book"></i>
+                    <div class="card-icon students">
+                        <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h4>Manage Books</h4>
-                    <p></p>
-                    <a href="manageBook.jsp" class="pulse">View Book</a>
+                    <h4>Student List</h4>
+                    <p>View all registered students</p>
+                    <a href="viewStudents.jsp">View Students</a>
                 </div>
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-users"></i>
+                    <div class="card-icon students">
+                        <i class="fas fa-book-open"></i>
                     </div>
-                    <h4>Student Management</h4>
-                    <p></p>
-                    <a href="stuManage.jsp" class="pulse">Add Book</a>
+                    <h4>Issue Book</h4>
+                    <p>Issue books to students</p>
+                    <a href="issue_book.jsp">Issue Book</a>
                 </div>
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-calendar-alt"></i>
+                    <div class="card-icon students">
+                        <i class="fas fa-undo"></i>
                     </div>
-                    <h4>Attendance Management</h4>
-                    <p></p>
-                    <a href="attManage.jsp" class="pulse">Update Book</a>
+                    <h4>Return Book</h4>
+                    <p>Accept book returns</p>
+                    <a href="return_book.jsp">Return Book</a>
                 </div>
-                
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-cog"></i>
+                    <div class="card-icon students">
+                        <i class="fas fa-search"></i>
                     </div>
-                    <h4>Settings & Feedback</h4>
-                    <p></p>
-                    <a href="settFeedback.jsp" class="pulse">Delete Book</a>
+                    <h4>Search Returns</h4>
+                    <p>Search returned books</p>
+                    <a href="search_return_book.jsp">Search Returns</a>
                 </div>
-               
+            </div>
+            <div class="dashboard-grid" style="margin-top: 1rem;">
+                <div class="dashboard-card">
+                    <div class="card-icon students">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <h4>Issued Books</h4>
+                    <p>Search currently issued books</p>
+                    <a href="Search Issued Books.jsp">Search Issued</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon students">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4>Attendance</h4>
+                    <p>Search student attendance</p>
+                    <a href="search_attendance.jsp">Search Attendance</a>
+                </div>
             </div>
         </div>
     </div>

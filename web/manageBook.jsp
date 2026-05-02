@@ -690,58 +690,56 @@
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
-        <!-- Welcome Header -->
-        <div class="welcome-header">
-            <h2>Welcome, <span class="text-gradient"><%= session.getAttribute("username") %></span></h2>
-            <p class="text-muted">Role: Librarian | Last Login: Today</p>
-            <div class="user-info">
-                <div class="user-avatar floating">
-                    <%= ((String) session.getAttribute("username")).charAt(0) %>
-                </div>
-                <div class="user-details">
-                    <h3><%= session.getAttribute("username") %></h3>
-                    <span class="badge">Librarian</span>
-                </div>
-            </div>
-        </div>
 
         <!-- Manage Books Section -->
         <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Manage Books</h3>
+            </div>
             <div class="dashboard-grid">
                 <div class="dashboard-card">
                     <div class="card-icon books">
-                        <i class="fas fa-book"></i>
+                        <i class="fas fa-book-open"></i>
                     </div>
-                    <h4>Manage Books</h4>
-                    <p></p>
-                    <a href="manageBook.jsp" class="pulse">View Book</a>
+                    <h4>View Book</h4>
+                    <p>View all registered Books</p>
+                    <a href="viewbooks.jsp" class="pulse">View Book</a>
                 </div>
                 <div class="dashboard-card">
                     <div class="card-icon books">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-plus"></i>
                     </div>
-                    <h4>Student Management</h4>
-                    <p></p>
-                    <a href="stuManage.jsp" class="pulse">Add Book</a>
+                    <h4>Add Book</h4>
+                    <p>Add new books to collection</p>
+                    <a href="add_book.jsp" class="pulse">Add Book</a>
                 </div>
                 <div class="dashboard-card">
                     <div class="card-icon books">
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-edit"></i>
                     </div>
-                    <h4>Attendance Management</h4>
-                    <p></p>
-                    <a href="attManage.jsp" class="pulse">Update Book</a>
+                    <h4>Update Book</h4>
+                    <p>Modify existing book details</p>
+                    <a href="update_book.jsp" class="pulse">Update Book</a>
                 </div>
-                
                 <div class="dashboard-card">
                     <div class="card-icon books">
-                        <i class="fas fa-cog"></i>
+                        <i class="fas fa-trash"></i>
                     </div>
-                    <h4>Settings & Feedback</h4>
-                    <p></p>
-                    <a href="settFeedback.jsp" class="pulse">Delete Book</a>
+                    <h4>Delete Book</h4>
+                    <p>Remove books from library</p>
+                    <a href="delete_book.jsp" class="pulse">Delete Book</a>
                 </div>
-               
+                <div class="dashboard-card">
+                    <div class="card-icon books">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>Search Book</h4>
+                    <p>Find books in the library</p>
+                    <a href="search_book.jsp" class="pulse">Search Book</a>
+                </div>
             </div>
         </div>
     </div>

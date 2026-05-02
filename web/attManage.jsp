@@ -690,58 +690,23 @@
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
-        <!-- Welcome Header -->
-        <div class="welcome-header">
-            <h2>Welcome, <span class="text-gradient"><%= session.getAttribute("username") %></span></h2>
-            <p class="text-muted">Role: Librarian | Last Login: Today</p>
-            <div class="user-info">
-                <div class="user-avatar floating">
-                    <%= ((String) session.getAttribute("username")).charAt(0) %>
-                </div>
-                <div class="user-details">
-                    <h3><%= session.getAttribute("username") %></h3>
-                    <span class="badge">Librarian</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Manage Books Section -->
+        <!-- Attendance Section -->
         <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Attendance Management</h3>
+            </div>
             <div class="dashboard-grid">
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-book"></i>
+                    <div class="card-icon attendance">
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <h4>Manage Books</h4>
-                    <p></p>
-                    <a href="manageBook.jsp" class="pulse">View Book</a>
+                    <h4>All Attendance</h4>
+                    <p>View complete attendance records</p>
+                    <a href="view_allattendance.jsp">View Attendance</a>
                 </div>
-                <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h4>Student Management</h4>
-                    <p></p>
-                    <a href="stuManage.jsp" class="pulse">Add Book</a>
-                </div>
-                <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h4>Attendance Management</h4>
-                    <p></p>
-                    <a href="attManage.jsp" class="pulse">Update Book</a>
-                </div>
-                
-                <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h4>Settings & Feedback</h4>
-                    <p></p>
-                    <a href="settFeedback.jsp" class="pulse">Delete Book</a>
-                </div>
-               
             </div>
         </div>
     </div>
