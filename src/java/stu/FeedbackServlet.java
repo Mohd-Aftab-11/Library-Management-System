@@ -207,7 +207,7 @@ public class FeedbackServlet extends HttpServlet {
                 out.println("        <button class='btn btn-primary' onclick=\"window.location.href='index.html'\">");
                 out.println("            <i class='fas fa-home'></i> Return to Home");
                 out.println("        </button>");
-                out.println("        <button class='btn btn-secondary' onclick=\"window.location.href='feedback.html'\">");
+                out.println("        <button class='btn btn-secondary' onclick=\"window.location.href='feedback.jsp'\">");
                 out.println("            <i class='fas fa-plus'></i> Submit Another");
                 out.println("        </button>");
                 out.println("    </div>");

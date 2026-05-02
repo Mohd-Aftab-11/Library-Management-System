@@ -713,22 +713,36 @@
 
         <!-- Library Services Section -->
         <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Library Services</h3>
+            </div>
             <div class="dashboard-grid">
                 <div class="dashboard-card">
                     <div class="card-icon books">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-search"></i>
                     </div>
-                    <h4>Library Services</h4>
-                    <p>Browse our Services.</p>
-                    <a href="libServices.jsp" class="pulse">Search Books</a>
+                    <h4>Search Books</h4>
+                    <p>Browse our extensive collection of books, journals, and digital resources.</p>
+                    <a href="search_book.jsp" class="pulse">Search Books</a>
                 </div>
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-user-circle"></i>
+                    <div class="card-icon feedback">
+                        <i class="fas fa-comment-dots"></i>
                     </div>
-                    <h4>Account & Attendance</h4>
-                    <p>Browse your Account.</p>
-                    <a href="accAttend.jsp" class="pulse">Search Books</a>
+                    <h4>Give Feedback</h4>
+                    <p>Share your suggestions and feedback to help us improve.</p>
+                    <a href="feedback.jsp">Give Feedback</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon fines">
+                        <i class="fas fa-money-check-alt"></i>
+                    </div>
+                    <h4>View Fines</h4>
+                    <p>Check and manage pending fines for late returns.</p>
+                    <a href="viewallfines.jsp">View Fines</a>
                 </div>
             </div>
         </div>

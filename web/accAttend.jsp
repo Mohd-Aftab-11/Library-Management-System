@@ -711,24 +711,38 @@
             </div>
         </div>
 
-        <!-- Library Services Section -->
+        <!-- Attendance & Profile Section -->
         <div class="dashboard-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h3>Account & Attendance</h3>
+            </div>
             <div class="dashboard-grid">
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-book-open"></i>
+                    <div class="card-icon attendance">
+                        <i class="fas fa-calendar-check"></i>
                     </div>
-                    <h4>Library Services</h4>
-                    <p>Browse our Services.</p>
-                    <a href="libServices.jsp" class="pulse">Search Books</a>
+                    <h4>Mark Attendance</h4>
+                    <p>Record your daily library visit attendance.</p>
+                    <a href="attendance.jsp">Mark Attendance</a>
                 </div>
                 <div class="dashboard-card">
-                    <div class="card-icon books">
-                        <i class="fas fa-user-circle"></i>
+                    <div class="card-icon profile">
+                        <i class="fas fa-user-cog"></i>
                     </div>
-                    <h4>Account & Attendance</h4>
-                    <p>Browse your Account.</p>
-                    <a href="accAttend.jsp" class="pulse">Search Books</a>
+                    <h4>My Profile</h4>
+                    <p>Update your personal information.</p>
+                    <a href="profile.jsp">Manage Profile</a>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon profile">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>Change Password</h4>
+                    <p>Update your account password for security.</p>
+                    <a href="change_password.jsp">Change Password</a>
                 </div>
             </div>
         </div>
