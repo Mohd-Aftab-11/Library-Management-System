@@ -540,7 +540,7 @@
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="librarian_dashboard.jsp">
+                        <a class="nav-link active" href="manageBook.jsp">
                             <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
                         </a>
                     </li>
@@ -572,7 +572,7 @@
                         <label for="book_id" class="form-label required">
                             <i class="fas fa-barcode"></i>Book ID
                         </label>
-                        <input type="text" class="form-control" id="book_id" name="book_id" required 
+                        <input type="number" class="form-control" id="book_id" name="book_id" required 
                                placeholder="Enter unique book ID">
                     </div>
 
