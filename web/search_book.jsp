@@ -617,7 +617,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <!-- Brand Logo -->
-            <a class="navbar-brand" href="<%= isLibrarian ? "librarian_dashboard.jsp" : "student_dashboard.jsp" %>">
+            <a class="navbar-brand" href="manageBook.jsp">
                 <div class="brand-icon">
                     <i class="fas fa-book-open fa-lg"></i>
                 </div>
